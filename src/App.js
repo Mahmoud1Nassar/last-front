@@ -3,34 +3,30 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import { useSelector } from 'react-redux';
 import './App.css';
 import { HelmetProvider, Helmet } from "react-helmet-async";
-
 // Import components
-import Footer from './Components/Footer/Footer';
-import Home from './Components/Home/Home';
-import Navbar from './Components/Navbar/Navbar';
-import Login from './Components/Login/Login';
-import EditProfile from './Components/Student/EditProfile/EditProfile';
-import TripList from './Components/Student/TripList/TripList.js';
-import ViewBusLocation from './Components/Student/ViewBusLocation/ViewBusLocation.js';
-import StudentAnnouncement from './Components/Student/StudentAnnouncement/StudentAnnouncement';
-import CreateProfile from './Components/Driver/CreateProfile/CreateProfile';
-import UpdateDriverProfile from './Components/Driver/UpdateDriverProfile/UpdateDriverProfile.js';
-import CreateDriver from './Components/Admin/CreateDriver/CreateDriver';
-import DriverAnnouncement from './Components/Driver/DriverAnnouncement/DriverAnnouncement';
-import UpdateLocationFromDriver from './Components/Driver/UpdateLocationFromDriver/UpdateLocationFromDriver';
-import CreateAnnouncement from './Components/Admin/CreateAnnouncement/CreateAnnouncement';
-import DriverMaintenanceRequest from './Components/Driver/DriverMaintenanceRequest/DriverMaintenanceRequest';
-import HandleDrivers from './Components/Admin/HandleDrivers/HandleDrivers';
-import CreateBus from './Components/Admin/Bus/CreateBus';
-import CreateSchedule from './Components/Admin/CreateSchedule/CreateSchedule';
-import CreateRoute from './Components/Admin/CreateRoute/CreateRoute';
-import AdminDashboard from './Components/Admin/AdminDashboard/AdminDashboard';
-import VerticalMenu from './Components/VerticalMenu/VerticalMenu';
-import FavList from './Components/Student/FavList/FavList.js'
-import Register from "./Components/register/Register";
-import Header from './Components/header/Header';
-import AllBussesLosations from './Components/Admin/AllBussesLocations/AllBussesLocations.js'
-
+import Home from './Components/Layout/Home/Home';
+import Navbar from './Components/Layout/Navbar/Navbar';
+import Login from './Components/Registration/Login/Login';
+import EditProfile from './Components/Users/Student/EditProfile/EditProfile.js';
+import TripList from './Components/Users/Student/TripList/TripList.js';
+import ViewBusLocation from './Components/Users/Student/ViewBusLocation/ViewBusLocation.js';
+import StudentAnnouncement from './Components/Users/Student/StudentAnnouncement/StudentAnnouncement.js';
+import CreateProfile from './Components/Users/Driver/CreateProfile/CreateProfile.js';
+import UpdateDriverProfile from './Components/Users/Driver/UpdateDriverProfile/UpdateDriverProfile.js';
+import CreateDriver from './Components/Users/Admin/CreateDriver/CreateDriver.js';
+import DriverAnnouncement from './Components/Users/Driver/DriverAnnouncement/DriverAnnouncement.js';
+import UpdateLocationFromDriver from './Components/Users/Driver/UpdateLocationFromDriver/UpdateLocationFromDriver.js';
+import CreateAnnouncement from './Components/Users/Admin/CreateAnnouncement/CreateAnnouncement.js';
+import DriverMaintenanceRequest from './Components/Users/Driver/DriverMaintenanceRequest/DriverMaintenanceRequest.js';
+import HandleDrivers from './Components/Users/Admin/HandleDrivers/HandleDrivers.js';
+import CreateBus from './Components/Users/Admin/Bus/CreateBus.js';
+import CreateSchedule from './Components/Users/Admin/CreateSchedule/CreateSchedule.js';
+import CreateRoute from './Components/Users/Admin/CreateRoute/CreateRoute.js';
+import AdminDashboard from './Components/Users/Admin/AdminDashboard/AdminDashboard.js';
+import VerticalMenu from './Components/Layout/VerticalMenu/VerticalMenu';
+import FavList from './Components/Users/Student/FavList/FavList.js'
+import SignUp from "./Components/Registration/SignUp/SignUp.js";
+import AllBussesLosations from './Components/Users/Admin/AllBussesLocations/AllBussesLocations.js';
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const token = useSelector((state) => state.auth.token);
@@ -55,14 +51,13 @@ function App() {
       <div style={{ display: 'flex'}}>
         <MainContent isAuthenticated={isAuthenticated} setLoggedIn={setLoggedIn} />
       </div>
-        <Footer />
     </Router>
     </HelmetProvider>
   );
 }
 function MainContent({ isAuthenticated, setLoggedIn }) {
   const location = useLocation();
-  const hideMenuRoutes = ['/', '/CreateProfile', '/Login', '/Register'];
+  const hideMenuRoutes = ['/', '/CreateProfile', '/Login', '/SignUp'];
   const shouldHideMenu = hideMenuRoutes.includes(location.pathname);
   // Determine if the current page is Home
   const isHomePage = location.pathname === '/' &&  location.pathname === '/Login' ;
@@ -73,8 +68,6 @@ function MainContent({ isAuthenticated, setLoggedIn }) {
       {/* Main content area */}
       <div style={isHomePage ? null : { flex: 1, padding: '20px' }}>
         <Routes>
-        <Route path="/" element={<><Header /><Home /></>} />
-
           <Route path="/" element={<Home />} />
           <Route path="/CreateSchedule" element={<CreateSchedule />} />
           <Route path="/CreateProfile" element={<CreateProfile />} />
@@ -94,9 +87,8 @@ function MainContent({ isAuthenticated, setLoggedIn }) {
           <Route path="/StudentAnnouncement" element={<StudentAnnouncement />} />
           <Route path="/ViewBusLocation/:driverId" element={<ViewBusLocation />} />
           <Route path="/FavList" element={<FavList />} />
-          <Route path="/Register" element={<Register />} />
+          <Route path="/SignUp" element={<SignUp />} />
           <Route path="/AllBussesLosations" element={<AllBussesLosations />} />
-
         </Routes>
       </div>
     </>
