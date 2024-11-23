@@ -1,0 +1,802 @@
+/* Main Page Layout */
+.student-home-page { 
+    display: flex;
+    align-items: flex-start;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec); /* Soft gradient background */
+    color: #333;
+    overflow: hidden;
+    padding: 20px;
+    gap: 30px;
+    border-radius: 12px;
+    position: relative; /* Ensure shadow is visible outside of the container */
+  
+    /* Layered shadow effects for depth and subtle inner glow */
+    box-shadow:
+      0 3px 6px rgba(0, 0, 0, 0.15),         /* Slight shadow for depth */
+      0 8px 12px rgba(0, 0, 0, 0.10),        /* Mid-layer shadow for lifted effect */
+      0 18px 30px rgba(0, 0, 0, 0.08),       /* Larger shadow for floating appearance */
+      inset 0 0 20px rgba(255, 255, 255, 0.25), /* Inner glow effect for soft lighting */
+      inset 0 0 30px rgba(150, 180, 200, 0.3); /* Subtle teal-blue tint for enhanced inner depth */
+    z-index: 1; /* Ensure it's above other content */
+  }
+  
+  /* Optional: Animation for soft pulsing effect (for more modern look) */
+  @keyframes subtlePulse {
+      0% {
+          box-shadow:
+            0 3px 6px rgba(0, 0, 0, 0.15),
+            0 8px 12px rgba(0, 0, 0, 0.10),
+            0 18px 30px rgba(0, 0, 0, 0.08),
+            inset 0 0 20px rgba(255, 255, 255, 0.25),
+            inset 0 0 30px rgba(150, 180, 200, 0.3);
+      }
+      50% {
+          box-shadow:
+            0 4px 7px rgba(0, 0, 0, 0.15),
+            0 10px 14px rgba(0, 0, 0, 0.10),
+            0 20px 35px rgba(0, 0, 0, 0.08),
+            inset 0 0 25px rgba(255, 255, 255, 0.3),
+            inset 0 0 35px rgba(150, 180, 200, 0.35);
+      }
+      100% {
+          box-shadow:
+            0 3px 6px rgba(0, 0, 0, 0.15),
+            0 8px 12px rgba(0, 0, 0, 0.10),
+            0 18px 30px rgba(0, 0, 0, 0.08),
+            inset 0 0 20px rgba(255, 255, 255, 0.25),
+            inset 0 0 30px rgba(150, 180, 200, 0.3);
+      }
+  }
+  
+  /* Add subtle pulse effect */
+  .student-home-page {
+    animation: subtlePulse 5s ease-in-out infinite;
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition */
+  }
+  
+  /* Optional Debugging Styles (to test visibility) */
+  .student-home-page:hover {
+    box-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.20), 
+      0 12px 16px rgba(0, 0, 0, 0.15), 
+      0 25px 40px rgba(0, 0, 0, 0.10),
+      inset 0 0 25px rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Container Styles for the Vertical Menu */
+  /* Container Styles for the Vertical Menu */
+  .v-page {
+    width: 270px; /* Adjust width */
+    padding: 25px;
+    color: #ECF0F1; /* Lighter text for good contrast */
+    border-radius: 12px; /* Smooth rounded corners */
+    box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    position: sticky; /* Keeps the menu fixed as you scroll */
+    top: 0;
+    z-index: 10;
+    height: 100vh; /* Full height to cover the screen */
+    overflow-y: auto; /* Allow scrolling if content exceeds viewport */
+    display: flex;
+    flex-direction: column; /* Ensures the items stack vertically */
+    background: linear-gradient(to right, 
+    rgba(28, 40, 51, 0.9),  /* Deep slate blue */
+    rgba(87, 136, 255, 0.8), /* Soft sky blue */
+    rgba(255, 168, 104, 0.7), /* Light amber gold */
+    rgba(255, 94, 77, 0.8)   /* Soft coral pink */
+  );
+  /* background: linear-gradient(to right, 
+    rgba(255, 83, 46, 0.9), 
+    rgba(252, 108, 69, 0.7), 
+    rgba(184, 28, 60, 0.8)  
+  );*/
+    background-size: 200% 200%; /* Makes the gradient move smoothly */
+    animation: gradientAnimation 6s ease infinite; /* Animates the gradient */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+  
+  /* Keyframes for the gradient animation */
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Menu List Styling */
+  .vertical-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Ensure the menu takes up the full vertical space */
+  }
+  
+  /* Individual Menu Item Styling */
+  .vertical-menu .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px; /* Spacing around the items */
+    margin-bottom: 12px; /* Spacing between items */
+    color: #BDC3C7; /* Light gray text for muted effect */
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 8px; /* Rounded corners for each item */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  /* Hover and Active Menu Item Effects */
+  .vertical-menu .menu-item:hover,
+  .vertical-menu .menu-item.active {
+    background-color: #34495E; /* Slightly lighter dark blue for hover */
+    color: #ECF0F1; /* White text on hover */
+    transform: translateX(6px); /* Slight slide effect on hover */
+  }
+  
+  /* Decorative Underline on Hover */
+  .vertical-menu .menu-item:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #3498DB; /* Blue underline on hover */
+    border-radius: 2px;
+  }
+  
+  /* Icon Styling */
+  .menu-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px; /* Adjusted spacing for a more balanced look */
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: grayscale(100%); /* Grayscale icons initially */
+  }
+  
+  /* Icon Hover Effects */
+  .vertical-menu .menu-item:hover .menu-icon {
+    filter: grayscale(0%); /* Colorize icons on hover */
+    transform: scale(1.2); /* Slightly enlarge the icon */
+  }
+  
+  /* Active Menu Item Styling */
+  .vertical-menu .menu-item.active {
+    background-color: #1ABC9C; /* Teal color for active state */
+    color: #ffffff; /* White text */
+    font-weight: 600; /* Bold text for emphasis */
+    box-shadow: 0 4px 10px rgba(26, 188, 156, 0.5); /* Teal shadow for active item */
+    border-left: 5px solid #ffffff; /* White left border for active state */
+  }
+  
+  /* Scrollbar Styling */
+  .v-page::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .v-page::-webkit-scrollbar-thumb {
+    background-color: #BDC3C7; /* Light gray scrollbar thumb */
+    border-radius: 6px;
+  }
+  
+  .v-page::-webkit-scrollbar-thumb:hover {
+    background-color: #95A5A6; /* Slightly darker thumb on hover */
+  }
+  
+  
+  
+  /* Content Section */
+  .content-section {
+    flex: 1;
+    padding: 35px;
+    background: linear-gradient(145deg, #f7f9fc, #e0e3e8); /* Softer gradient for a refined, modern look */
+    border-radius: 16px; /* Rounded corners for a soft and elegant feel */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08); /* Multi-layered shadow for depth */
+    transition: all 0.3s ease-out; /* Smooth transition for hover effect */
+    overflow-y: auto;
+    background-size: cover; /* Ensures the gradient fills the entire section */
+    position: relative; /* Allows precise control over internal elements */
+  }
+  
+  /* Hover effect to add depth and interactivity */
+  .content-section:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1); /* Increased depth for hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+  }
+  
+  /* Custom Scrollbar Styling */
+  .content-section::-webkit-scrollbar {
+    width: 14px; /* Slightly wider scrollbar for better UX */
+    background: #f2f2f2; /* Subtle light background for the track */
+  }
+  
+  .content-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(145deg, #bbc7d6, #b0c0d0); /* Soft gradient for the thumb */
+    border-radius: 10px; /* Rounded thumb */
+    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  }
+  
+  .content-section::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(145deg, #8a98a1, #6d7d83); /* Darker thumb on hover */
+    transform: scale(1.1); /* Slight scale effect on hover */
+  }
+  
+  /* Optional: Custom scrollbar track with a more refined background */
+  .content-section::-webkit-scrollbar-track {
+    background: #f2f2f2; /* Lighter background for the scrollbar track */
+    border-radius: 10px;
+  }
+  
+  /* Optional: Adding a subtle overlay for content */
+  .content-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2); /* Light overlay for additional refinement */
+    border-radius: 16px; /* Match border radius */
+    pointer-events: none; /* Ensures overlay doesn't interfere with interactions */
+  }
+  
+  /* Announcement Section */
+  .announcement-section {
+    padding: 40px;
+    background: #f9f9f9; /* Light background for readability */
+    border-radius: 12px; /* Rounded corners for a smooth feel */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 900px; /* Restrict maximum width for a tidy layout */
+    margin: 0 auto; /* Centering the section */
+    overflow: hidden; /* Ensures nothing overflows the container */
+  }
+  
+  /* Title Style */
+  /* Professional Title Styling */
+  .announcement-title {
+    font-size: 28px; /* Appropriate size for prominence */
+    font-weight: 600; /* Medium weight for clarity */
+    color: #2e3b4e; /* Default dark blue-gray color */
+    margin-bottom: 20px; /* Adequate spacing */
+    text-align: center; /* Center the title */
+    letter-spacing: 0.5px; /* Slight spacing for readability */
+    font-family: 'Roboto', sans-serif; /* Clean, modern font */
+    text-transform: capitalize; /* Elegant capitalizing */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth color change and lift */
+  }
+  
+  /* Hover Effect: Professional and Subtle */
+  .announcement-title:hover {
+    color: #1a2431; /* Darker shade for a refined hover effect */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transform: translateY(-2px); /* Slight lift for elegance */
+    cursor: pointer; /* Pointer to indicate interactivity */
+    letter-spacing: 1px; /* Increase spacing for visual effect */
+  }
+  
+  
+  /* Announcement List Style */
+  .announcement-list {
+    margin-top: 20px;
+  }
+  
+  /* Individual Announcement Item Style */
+  .announcement-item {
+    background: #ffffff; /* White background for each item */
+    border-radius: 8px; /* Slight rounding of item corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Light shadow for elevation */
+    margin-bottom: 15px; /* Spacing between items */
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  }
+  
+  /* Hover Effect on Announcement Item */
+  .announcement-item:hover {
+    transform: translateY(-5px); /* Slight lift for interactivity */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Enhance shadow on hover */
+  }
+  
+  /* Skeleton Loader Style */
+  .announcement-item .ant-skeleton {
+    background: #f0f0f0; /* Lighter background for skeleton */
+    border-radius: 8px; /* Rounded skeleton elements */
+    margin-bottom: 15px; /* Space before content */
+  }
+  
+  /* Avatar Style */
+  .announcement-item .ant-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Circular avatar */
+    margin-right: 15px; /* Space between avatar and text */
+  }
+  
+  /* Item Meta Title */
+  .announcement-item .ant-list-item-meta-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  /* Item Meta Description (Date) */
+  .announcement-item .ant-list-item-meta-description {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+  /* Announcement Content Text */
+  .announcement-item .ant-typography {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6; /* Improve readability */
+    margin-top: 10px;
+  }
+  
+  /* Loading Indicator */
+  .ant-skeleton.active {
+    animation: loadingPulse 1.5s infinite ease-in-out; /* Subtle pulse animation for loading */
+  }
+  
+  /* Loading Pulse Keyframe */
+  @keyframes loadingPulse {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Text Style */
+  .text {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  
+  /* Trip List Section Styling */
+  .trip-list-section {
+    padding: 40px 30px; /* Spacious padding for a clean layout */
+    background: linear-gradient(135deg, #e3f2fd 0%, #d3e9fc 100%); /* Soft gradient background for elegance */
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), 0 15px 30px rgba(0, 0, 0, 0.05); /* Deep shadow for floating effect */
+    max-height: 80vh; /* Ensure it's scrollable when overflowing */
+    overflow-y: auto; /* Smooth scrolling */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  /* Hover Effect for Section */
+  .trip-list-section:hover {
+    transform: translateY(-5px); /* Subtle lift effect */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15), 0 20px 45px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+  }
+  
+  /* Title Styling */
+  .trip-list-title {
+    font-size: 32px; /* Larger font size for visual hierarchy */
+    font-weight: 800; /* Extra bold for emphasis */
+    color: #0d47a1; /* Strong blue color */
+    text-align: center; /* Center the title */
+    margin-bottom: 30px; /* Space between title and list */
+    text-transform: uppercase; /* Make title stand out with uppercase */
+    letter-spacing: 1.5px; /* Increased spacing for refinement */
+    position: relative; /* For creative effects */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
+  }
+  
+  /* Hover Effect for Title */
+  .trip-list-title:hover {
+    color: #0288d1; /* Change to lighter blue on hover */
+    transform: translateY(-2px); /* Slight shift to create interactivity */
+    cursor: pointer; /* Pointer cursor to indicate interactivity */
+  }
+  
+  /* Title Decorative Border */
+  .trip-list-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #0288d1; /* Blue underline on hover */
+    transform: scaleX(0); /* Hidden initially */
+    transition: transform 0.3s ease; /* Smooth scale effect */
+  }
+  
+  .trip-list-title:hover::after {
+    transform: scaleX(1); /* Expand the underline on hover */
+  }
+  
+  /* List Item Styling */
+  .trip-list {
+    margin-top: 25px; /* Adequate space between title and list */
+  }
+  
+  .trip-list-item {
+    display: flex;
+    align-items: center; /* Center content vertically */
+    padding: 15px 20px; /* Spacing inside the items */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #ffffff; /* White background for clarity */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Light shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth hover effect */
+    cursor: pointer; /* Pointer cursor for interactive items */
+    margin-bottom: 15px; /* Space between list items */
+    position: relative; /* For creative effect */
+  }
+  
+  /* Hover Effect for List Item */
+  .trip-list-item:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    background-color: #f0f8ff; /* Light background on hover */
+  }
+  
+  /* Hover Effect for Avatar */
+  .trip-list-item:hover .ant-avatar {
+    transform: scale(1.1); /* Slight zoom effect on avatar */
+  }
+  
+  /* List Item Meta (Avatar, Title, Description) */
+  .trip-list-item .ant-list-item-meta {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Space between meta and the text */
+  }
+  
+  .trip-list-item .ant-list-item-meta .ant-avatar {
+    border-radius: 50%; /* Round avatar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Small shadow for avatar */
+    transition: transform 0.2s ease; /* Smooth scale effect */
+  }
+  
+  .trip-list-item .ant-list-item-meta .ant-typography {
+    font-size: 16px; /* Smaller text size for titles */
+    font-weight: 600; /* Slightly bold titles */
+    color: #1e3a8a; /* Darker blue for text */
+  }
+  
+  .trip-list-item .ant-list-item-meta .ant-typography + .ant-typography {
+    color: #757575; /* Gray for secondary text */
+    font-size: 14px; /* Slightly smaller for descriptions */
+    margin-top: 4px; /* Small gap between title and description */
+  }
+  
+  /* Skeleton Loader Styling (Optional for loading state) */
+  .trip-list-item .ant-skeleton {
+    background-color: #e0e0e0; /* Light gray background during loading */
+    border-radius: 8px; /* Rounded skeleton loaders */
+  }
+  
+  /* Optional: Avatar Hover Effect */
+  .trip-list-item .ant-avatar:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Highlight the avatar */
+    transform: scale(1.1); /* Slight zoom effect on avatar */
+  }
+  
+  /* Smooth Scroll Effect for List */
+  .trip-list-section::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .trip-list-section::-webkit-scrollbar-thumb {
+    background-color: #90a4ae; /* Muted thumb color */
+    border-radius: 8px;
+  }
+  
+  .trip-list-section::-webkit-scrollbar-thumb:hover {
+    background-color: #607d8b; /* Darker on hover */
+  }
+  
+  /* Route Details Section */
+  .route-details-section {
+    padding: 30px;
+    background-color: #f5f7fa; /* Light gray for a neutral background */
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 20px; /* Space below the section */
+  }
+  
+  /* Route Title Styling */
+  .rdetails {
+    font-size: 32px; /* Slightly larger for increased prominence */
+    font-weight: 900; /* Ultra-bold for greater impact */
+    color: #34495e; /* A rich, sophisticated dark blue-gray */
+    margin-bottom: 30px; /* Increased margin for better visual spacing */
+    text-align: center; /* Centered for perfect alignment */
+    letter-spacing: 1.5px; /* Elegant spacing between letters */
+    text-transform: capitalize; /* Ensures proper title casing */
+    line-height: 1.3; /* Adjust line height for balanced text density */
+    position: relative; /* Enables positioning of pseudo-elements */
+    transition: color 0.4s ease, transform 0.4s ease, text-shadow 0.4s ease; /* Smooth transitions */
+  }
+  
+  /* Hover effect for Route Title */
+  .rdetails:hover {
+    color: #1abc9c; /* Professional teal color on hover */
+    transform: translateY(-5px); /* Elevates the title for a more dynamic effect */
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for better contrast */
+  }
+  
+  /* Optional: Add subtle glow on hover for emphasis */
+  .rdetails::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(26, 188, 156, 0.7), rgba(26, 188, 156, 0)); /* Soft glowing line */
+    transition: background 0.3s ease;
+  }
+  
+  /* Enhance the glow effect during hover */
+  .rdetails:hover::after {
+    background: linear-gradient(90deg, rgba(26, 188, 156, 1), rgba(26, 188, 156, 0)); /* Stronger glow on hover */
+  }
+  
+  
+  /* Formal Styling for Start Point, End Point, and Distance */
+  .SPoint, .EPoint, .Distance {
+    font-weight: 500; /* Lighter weight for a refined and formal look */
+    font-size: 15px; /* Standard size for easy readability */
+    color: #34495e; /* Dark gray-blue for a formal, professional tone */
+    letter-spacing: 0.25px; /* Subtle letter spacing for clarity without being too wide */
+    line-height: 1.5; /* Adjusted line height for a cleaner look */
+    margin-bottom: 10px; /* Spacing between elements to avoid clutter */
+    display: inline-block; /* Ensures text aligns neatly */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transitions for hover/focus states */
+  }
+  
+  /* Formal Styling for Start Point */
+  .SPoint {
+    color: #2c3e50; /* A deep, neutral blue for the start point */
+    font-size: 16px; /* Slightly larger for emphasis */
+    text-transform: capitalize; /* Capitalizes the first letter of each word */
+  }
+  
+  /* Formal Styling for End Point */
+  .EPoint {
+    color: #e74c3c; /* A rich, formal red to highlight the end point */
+    font-size: 16px; /* Slightly larger for visual contrast */
+    text-transform: capitalize; /* Ensures proper casing */
+  }
+  
+  /* Formal Styling for Distance */
+  .Distance {
+    color: #27ae60; /* A refined green for the distance, symbolizing progress */
+    font-size: 16px; /* Slightly larger for consistency with other elements */
+    text-transform: capitalize; /* Keeps the text formal with proper casing */
+  }
+  
+  /* Hover Effect */
+  .SPoint:hover, .EPoint:hover, .Distance:hover {
+    color: #1abc9c; /* Elegant teal for hover effect */
+    text-decoration: underline; /* Underline indicates interactivity without being overdone */
+  }
+  
+  /* Focus Effect for Accessibility */
+  .SPoint:focus, .EPoint:focus, .Distance:focus {
+    outline: 2px solid #16a085; /* Accessible and subtle focus outline */
+    outline-offset: 4px; /* Ensures the focus outline doesn’t touch the text */
+    transition: outline 0.3s ease; /* Smooth transition for focus outline */
+  }
+  
+  
+  /* Stop Points Section Styling */
+  .stop-points-section {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  /* Professional Styling for Stop Points Title */
+  .title-stop-points {
+    font-size: 26px; /* Slightly larger for emphasis while maintaining elegance */
+    font-weight: 600; /* Semi-bold to provide clarity and authority without being too heavy */
+    color: #34495e; /* A refined, darker shade of blue-gray for a more professional look */
+    margin-bottom: 20px; /* More spacing at the bottom to give it breathing room */
+    text-align: center; /* Align to the left for a formal, clean look */
+    letter-spacing: 0.5px; /* Light letter spacing for readability */
+    line-height: 1.4; /* Improved line height for a balanced and structured appearance */
+    text-transform: capitalize; /* Ensure proper casing, making the title more polished */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions for hover or focus effects */
+  }
+  
+  /* Hover Effect for Title */
+  .title-stop-points:hover {
+    color: #1abc9c; /* Subtle teal hover effect to highlight the title */
+    transform: translateX(5px); /* Slight movement to the right to create an interactive feel */
+  }
+  
+  /* Focus Effect for Accessibility */
+  .title-stop-points:focus {
+    outline: 2px solid #1abc9c; /* Teal focus outline for visual feedback */
+    outline-offset: 4px;
+  }
+  
+  
+  /* Horizontal List Styled as LinkedList */
+  .stop-points-list-horizontal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .stop-point-item {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9fb;
+    border-radius: 6px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
+  }
+  
+  .stop-point-item:hover {
+    background-color: #3498db; /* Highlight color on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+    transform: scale(1.05); /* Slight scale up effect */
+  }
+  
+  .value {
+    color: #5d6d7e;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Smooth color transition for text */
+  }
+  
+  .stop-point-item:hover .value {
+    color: #ffffff; /* White color on hover */
+  }
+  
+  .pointer {
+    font-size: 16px;
+    color: #3498db;
+    margin-left: 8px;
+  }
+  
+  
+  /* Schedules Section Styling */
+  .schedules-section {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Enhanced Professional Styling for Schedule Title */
+  .titleSchedule {
+    font-size: 26px; /* Increased font size for better emphasis while remaining elegant */
+    font-weight: 600; /* Semi-bold for clarity and authority */
+    color: #2c3e50; /* Dark blue-gray for a professional, clean look */
+    margin-bottom: 20px; /* Increased bottom margin for better spacing */
+    text-align: left; /* Align to the left for a more formal and structured look */
+    letter-spacing: 0.5px; /* Light letter spacing for improved readability */
+    line-height: 1.4; /* More vertical space between lines for a cleaner appearance */
+    text-transform: capitalize; /* Proper capitalization for a refined feel */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and transform on hover */
+  }
+  
+  /* Hover Effect for Title */
+  .titleSchedule:hover {
+    color: #16a085; /* Subtle, sophisticated teal for the hover effect */
+    transform: translateX(5px); /* Slight rightward movement to create an interactive feel */
+  }
+  
+  /* Focus Effect for Accessibility */
+  .titleSchedule:focus {
+    outline: 2px solid #16a085; /* Teal focus outline for accessibility */
+    outline-offset: 4px;
+  }
+  
+  
+  /* List Items in Schedules Section */
+  .schedules-list .listI2 {
+    padding: 15px 20px; /* Increased padding for better content spacing */
+    background-color: #f9f9fb; /* Light, neutral background color */
+    border-radius: 8px; /* Softer rounded corners for a more modern look */
+    margin-bottom: 15px; /* More breathing space between items */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: all 0.3s ease-in-out; /* Smooth transition for interactive effects */
+  }
+  
+  .schedules-list .listI2:hover {
+    background-color: #ecf0f1; /* Light hover background for interactivity */
+    transform: translateY(-3px); /* Slight lift effect on hover for a dynamic feel */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Increased shadow for depth */
+  }
+  
+  /* Start Time and End Time Labels */
+  .Starttime, .Endtime {
+    font-weight: 700; /* Bold for emphasis */
+    color: #2c3e50; /* Slightly darker gray-blue for better contrast */
+    font-size: 16px; /* Slightly larger font size for readability */
+    text-transform: capitalize; /* Ensures each word starts with a capital letter */
+    letter-spacing: 0.5px; /* Adds slight space between letters for clarity */
+  }
+  
+  /* Text Values for Start Time and End Time */
+  .Starttime + span, .Endtime + span {
+    font-weight: 400; /* Lighter weight for the actual time values */
+    color: #7f8c8d; /* Muted gray for subtlety */
+    font-size: 16px; /* Same size as labels to maintain visual balance */
+  }
+  
+  /* No Schedules Available Message */
+  .noschedules {
+    color: #95a5a6; /* Soft, muted gray for unavailability message */
+    font-style: italic; /* Italicized for subtle emphasis */
+    font-size: 14px; /* Smaller font size for a less prominent message */
+    text-align: center; /* Center-aligned for a neat look */
+    margin-top: 20px; /* More space from the content */
+    letter-spacing: 0.5px; /* Slight letter spacing for readability */
+  }
+  
+  /* Subtle Shadow for Empty States */
+  .noschedules::before {
+    content: "→ "; /* Adds a directional arrow before the message */
+    color: #16a085; /* Teal arrow to match the overall theme */
+    font-size: 20px;
+  }
+  
+  
+  /* Back Button Styling */
+  /* Back Button Styling */
+  .btu {
+    margin-top: 20px;
+    padding: 14px 28px; /* Slightly more spacious padding for a balanced feel */
+    background-color: #2980b9; /* Professional blue with a sense of stability */
+    color: #ffffff; /* Crisp white text for high contrast */
+    font-weight: 700; /* Bold, for clear emphasis */
+    font-size: 16px; /* Slightly larger font size for readability */
+    border: none;
+    border-radius: 50px; /* Fully rounded corners for a modern and premium look */
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth and floating effect */
+    transition: all 0.3s ease-in-out; /* Smooth transition for all states */
+    text-transform: uppercase; /* Text in uppercase for a uniform, professional feel */
+    letter-spacing: 1px; /* Slightly spaced letters for a polished effect */
+  }
+  
+  /* Hover Effect for Button */
+  .btu:hover {
+    background-color: #3498db; /* Slightly lighter blue for hover effect, ensuring clarity */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deepens the shadow on hover for a more pronounced effect */
+    transform: translateY(-4px); /* Slight lift effect, increasing interactivity */
+    transition: all 0.3s ease-in-out; /* Ensures smooth transition of all properties */
+  }
+  
+  /* Active/Focus State for Button */
+  .btu:active, .btu:focus {
+    background-color: #1f7ab9; /* Darker blue to signal active or focused state */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly deeper shadow for focused state */
+    transform: translateY(2px); /* Slightly lower position when clicked for realistic feedback */
+    outline: none; /* Removes the default outline for focus to prevent distractions */
+  }
+  
+  /* Disabled State for Button */
+  .btu:disabled {
+    background-color: #bdc3c7; /* Muted gray when the button is disabled */
+    color: #7f8c8d; /* Lighter text color to indicate disabled state */
+    cursor: not-allowed; /* Change cursor to not-allowed when disabled */
+    box-shadow: none; /* No shadow for disabled button */
+  }
+  

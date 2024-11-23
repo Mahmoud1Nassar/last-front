@@ -1,0 +1,27 @@
+.view-bus-location {
+  padding: 20px;
+}
+
+.stop-points-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.stop-point-box {
+  padding: 10px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.stop-point-box.current-location {
+  background-color: #f0f8ff;
+  border-color: #1890ff;
+}
+
+.arrow-icon {
+  margin: 0 10px;
+  font-size: 20px;
+  color: #1890ff;
+}

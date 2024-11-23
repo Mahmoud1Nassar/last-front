@@ -1,0 +1,258 @@
+/*-----------------------------------*\
+  #HEADER
+\*-----------------------------------*/
+
+.search-btn .span,
+.header .btn { display: none; }
+
+.header {
+  position: relative;
+  padding-block: 25px;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.search-btn { font-size: 28px; }
+
+.search-btn ion-icon { --ionicon-stroke-width: 50px; }
+
+.nav-toggle-btn .span {
+  background-color: var(--eerie-black);
+  width: 30px;
+  height: 3px;
+  transition: var(--transition-1);
+}
+
+.nav-toggle-btn .span:not(:last-child) { margin-block-end: 7px; }
+
+.nav-toggle-btn.active .span.two { opacity: 0; }
+
+.nav-toggle-btn.active .span.one { transform: translateY(10px) rotate(45deg); }
+
+.nav-toggle-btn.active .span.three { transform: translateY(-10px) rotate(-45deg); }
+
+.navbar {
+  background-color: var(--eerie-black);
+  color: var(--white);
+  position: absolute;
+  top: calc(100% - 20px);
+  right: 0;
+  min-width: 180px;
+  padding: 15px 10px;
+  border-radius: var(--radius-16);
+  transform: translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-1);
+  z-index: 2;
+}
+
+.navbar.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.navbar-link {
+  text-align: right;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  padding: 5px;
+}
+
+/*-----------------------------------*\
+  #SEARCH BAR
+\*-----------------------------------*/
+
+.search-bar {
+  background-color: var(--white);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  transform: translateY(calc(-100% - 2px));
+  z-index: 4;
+  transition: var(--transition-1);
+  visibility: hidden;
+}
+
+.search-bar.active {
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.search-bar .input-field {
+  font-size: var(--fs-1);
+  font-weight: var(--fw-700);
+  line-height: 1.3;
+  padding-inline-end: 60px;
+}
+
+.search-bar .input-field::placeholder { color: var(--eerie-black); }
+
+.search-bar .input-field::-webkit-search-cancel-button { display: none; }
+
+.search-close-btn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 45px;
+}
+
+.search-close-btn ion-icon { --ionicon-stroke-width: 20px; }
+
+.search-bar-text {
+  font-size: 1.4rem;
+  color: var(--eerie-black_80);
+  margin-block-start: 5px;
+}
+
+
+
+/**
+ * responsive for large than 992px screen
+ */
+
+@media (min-width: 992px) {
+
+  /**
+   * CUSTOM PROPERTY
+   */
+
+  :root {
+
+    /**
+     * typography
+     */
+
+    --fs-1: 8.8rem;
+    
+    /**
+     * spacing
+     */
+
+    --section-padding: 60px;
+
+  }
+
+
+
+  /**
+   * REUSED STYLE
+   */
+
+  .section { margin-inline: 60px; }
+
+  .has-scrollbar {
+    margin-inline: -60px;
+    padding-inline: 60px;
+  }
+
+  .has-scrollbar::-webkit-scrollbar-button { width: 30px; }
+
+  .btn {
+    --fs-6: 2.4rem;
+    padding: 18px 36px;
+  }
+
+
+  /**
+   * HEADER
+   */
+
+  .nav-toggle-btn { display: none; }
+
+  .search-btn .span,
+  .header .btn { display: block; }
+
+  .header .wrapper { gap: 10px; }
+
+  .search-btn,
+  .header .btn {
+    --fs-6: 1.8rem;
+    padding: 6px 20px;
+  }
+
+  .search-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--cultured);
+    font-size: var(--fs-6);
+    font-weight: var(--fw-500);
+    border-radius: var(--radius-pill);
+    transition: var(--transition-1);
+  }
+
+  .search-btn:is(:hover, :focus) { background-color: var(--gainsboro); }
+
+  .navbar,
+  .navbar.active {
+    all: unset;
+    margin-inline: auto 12px;
+  }
+
+  .navbar-list {
+    display: flex;
+    gap: 8px;
+  }
+
+
+}
+
+
+/**
+ * responsive for large than 1200px screen
+ */
+
+@media (min-width: 1200px) {
+
+  /**
+   * CUSTOM PROPERTY
+   */
+
+  :root {
+
+    /**
+     * typography
+     */
+
+    --fs-1: 9.2rem;
+    --fs-2: 6rem;
+    --fs-3: 2.6rem;
+    --fs-4: 2.4rem;
+  }
+
+
+  /**
+   * REUSED STYLE
+   */
+
+  .section { margin-inline: 70px; }
+
+  .has-scrollbar {
+    margin-inline: -70px;
+    padding-inline: 70px;
+  }
+
+  .has-scrollbar::-webkit-scrollbar-button { width: 35px; }
+
+  .card-tag {
+    --fs-9: 1.4rem;
+    padding: 4px 10px;
+  }
+
+  .grid-list { row-gap: 50px; }
+
+}
