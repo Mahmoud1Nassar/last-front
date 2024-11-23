@@ -29,7 +29,7 @@ const Home = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const navigate = useNavigate(); // Hook to navigate programmatically
   const handleSignUpClick = () => {
-    navigate('/register'); // Navigate to the Register component
+    navigate('/SignUp'); // Navigate to the Register component
   };
   const [searchBarActive, setSearchBarActive] = useState(false);
 
@@ -189,8 +189,8 @@ const Home = () => {
           </div>
           <br />
           <div className="news">
-            <p className="employees">100+</p>
-            <p className="details">
+            <p className="employees"style={{marginTop:'30px'}}>100+</p>
+            <p className="details" style={{fontSize:'18px'}}>
               Our growing fleet of over <strong>100</strong> buses is designed to meet the diverse needs of our student body. With a variety of routes covering every corner of the campus and surrounding areas, we ensure that transportation is accessible to everyone, no matter where you're located. Each bus is equipped with modern amenities for your comfort, and our drivers are highly trained to prioritize your safety. We are continually investing in our fleet to improve service reliability, and we are excited to introduce new routes and eco-friendly buses in the near future to keep up with the increasing demand.
             </p>
           </div>
@@ -202,7 +202,7 @@ const Home = () => {
           <div className="container">
             {/* RECOMMENDED POST Section */}
             <section className="section recommended" id="services" aria-label="recommended post">
-              <div className="container">
+              <div className="container" style={{paddingLeft:'70px'}}>
                 <p className="section-subtitle">
                   <strong className="strong">Services</strong>
                 </p>
