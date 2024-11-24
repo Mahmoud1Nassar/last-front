@@ -1,0 +1,371 @@
+/* Container for the signup forms */
+.signup-forms-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Two columns layout */
+    gap: 20px;
+    /* Space between the columns */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 2px solid #EBECF0;
+    border-radius: 15px;
+    box-shadow: 15px 37px 58px rgb(0 0 0 / 22%);
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .signup-forms-container {
+        grid-template-columns: 1fr;
+        /* Single column layout on smaller screens */
+        padding: 15px;
+        /* Reduce padding for smaller screens */
+    }
+}
+
+/* Additional responsiveness for very small screens (e.g., mobile portrait) */
+@media (max-width: 480px) {
+    .signup-forms-container {
+        gap: 15px;
+        /* Slightly reduce the gap between the forms */
+    }
+}
+
+
+/* Main container for the signup page */
+.signup-container {
+
+    background: rgba(254, 253, 255, 0.96);
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 80px 90px;
+    /* Added padding for better spacing */
+}
+
+/* Keyframe for sliding in the form */
+@keyframes slideIn {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* Signup form styles */
+#signupForm {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+
+}
+
+
+/* Title inside the form */
+#signupForm h2 {
+    color: #131313;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+}
+
+/* Labels for inputs */
+#signupForm label {
+    color: #9A9A9A;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+
+/* Input field styles */
+#signupForm input[type="text"],
+#signupForm input[type="email"],
+#signupForm input[type="password"] {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 2px solid #EBECF0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    /* Reduced bottom margin */
+    font-size: 20px;
+    color: #242424;
+}
+
+/* Horizontal layout for options */
+.signflhorizontal {
+    display: flex;
+    gap: 40px;
+    /* Reduced gap between elements */
+    margin-top: 50px;
+    justify-content: space-between;
+}
+
+#lablemargin {
+    margin-bottom: 4px;
+    display: inline-flex;
+}
+
+/* Radio button styles */
+.radio-buttons {
+    width: 100%;
+}
+
+#radio-buttons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.radiobflex {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    /* Reduced gap for better alignment */
+}
+
+.rdbwidth {
+    width: 50%;
+}
+
+/* Submit button */
+#signupForm button[type="submit"] {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#signupForm button[type="submit"]:hover {
+    background-color: black;
+}
+
+/* Board styles for signup */
+.board {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.board-back {
+    background: black;
+    width: 100%;
+    height: 698px;
+    border-radius: 15px;
+}
+
+.board h1 {
+    font-weight: 600;
+    font-size: 46px;
+    color: #FFFFFF;
+    margin-top: 91px;
+}
+
+.board h3 {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.board p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #EBECF0;
+    margin-top: 11px;
+}
+
+.board-details {
+    margin-left: 32px;
+    margin-top: 41px;
+    margin-right: 34px;
+    margin-bottom: 37px;
+}
+
+/* Review card in the signup form */
+.review-card-position {
+    bottom: 45px;
+    position: relative;
+    bottom: -50px;
+}
+
+.review-card {
+    width: 500px;
+    height: 162px;
+    background: #242424;
+    border-radius: 10px;
+}
+
+.review-card-details {
+    position: relative;
+    top: 10%;
+    left: 80px;
+    transform: translateY(-50%);
+    width: 60%;
+    color: #ffffff;
+    text-align: center;
+    margin: 90px 10px;
+    padding: 20;
+}
+
+.review-card-details p {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 25px;
+}
+
+.person-image {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.person-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.person-image div {
+    font-size: 14px;
+    text-align: left;
+    color: white;
+}
+
+.person-image h5 {
+    font-size: 12px;
+    font-family: 'Roboto';
+    color: white;
+}
+
+.alamlink {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* Adds some space between "Already a member?" and the link */
+}
+
+.alamlink a {
+    color: #5114FF;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.alamlink a:hover {
+    text-decoration: none;
+}
+
+
+.signflhorizontal {
+    display: flex;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+#lablemargin {
+    margin-bottom: 4px;
+    display: inline-flex;
+}
+
+.radio-buttons {
+    width: 100%;
+}
+
+#radio-buttons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.radiobflex {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.rdbwidth {
+    width: 50%;
+}
+
+
+/* Overall Form Layout */
+.signflhorizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Styling for individual form fields */
+.signflhorizontal>div {
+    width: 100%;
+    max-width: 48%;
+    /* Ensures two inputs per row */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Adjust the appearance of the radio buttons container */
+.radio-buttons {
+    margin-bottom: 20px;
+}
+
+.radio-buttons label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* Flexbox for radio buttons */
+.radiobflex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rdbwidth {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Styling the radio button inputs */
+input[type="radio"] {
+    width: auto;
+    height: auto;
+    margin-right: 5px;
+}

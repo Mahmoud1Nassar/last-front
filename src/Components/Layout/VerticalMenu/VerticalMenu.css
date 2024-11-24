@@ -1,0 +1,40 @@
+.vertical-menu {
+  width: 350px;
+  background-color: #FFFFFF;
+  border-right: 1px solid #E0E0E0;
+  height: 100%;
+  box-shadow: 2px 0 10px rgba(106, 195, 223, 0.788);
+  border-radius: 8px;
+}
+
+.vertical-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 8px;
+  margin-bottom: 10px;
+  color: #000000 !important; /* Force black text */
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.menu-item:hover {
+  background-color: #F5FAFF;
+  color: #000000 !important; /* Ensure hover text remains black */
+}
+
+.menu-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  filter: grayscale(100%);
+}
+
+.menu-item:hover .menu-icon {
+  filter: none;
+}
