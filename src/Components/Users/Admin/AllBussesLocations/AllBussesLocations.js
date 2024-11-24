@@ -15,7 +15,7 @@ const AllLocations = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        "http://localhost:5236/api/Buses/AllBussesLosations",
+        "https://localhost:7032/api/Buses/AllBussesLocations",
         {
           headers: {
             Authorization: `Bearer ${token}`,

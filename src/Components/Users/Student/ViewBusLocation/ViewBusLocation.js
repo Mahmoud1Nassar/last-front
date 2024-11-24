@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Skeleton, message, Button, Alert } from 'antd';
+import { Typography, Skeleton, message, Button, Alert, Modal } from 'antd';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { ArrowRightOutlined, ReloadOutlined } from '@ant-design/icons';
@@ -14,6 +14,8 @@ const ViewBusLocation = () => {
   const [currentLocation, setCurrentLocation] = useState("");
   const [routeName, setRouteName] = useState("");
   const [isTripFinished, setIsTripFinished] = useState(false);
+  const [driverDetails, setDriverDetails] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     if (driverId) {
@@ -27,23 +29,23 @@ const ViewBusLocation = () => {
       const response = await axios.get(
         `https://localhost:7032/api/Buses/CurrentLocationByDriverId?driverId=${id}`
       );
-  
+
       console.log("API Response Data:", response.data);
-  
-      const { currentLocation, stopPoints, routeName } = response.data;
-  
+
+      const { currentLocation, stopPoints, routeName, driverName, phoneNumber, busId } = response.data;
+
       if (stopPoints?.$values && Array.isArray(stopPoints.$values)) {
         const mappedStopPoints = stopPoints.$values.map((point) => ({
           id: point.stopPointId,
           name: point.name,
           estimatedTime: point.estimatedTime,
         }));
-  
+
         setStopPoints(mappedStopPoints);
-  
+
         const lastStopPoint = mappedStopPoints[mappedStopPoints.length - 1]?.name;
         const firstStopPoint = mappedStopPoints[0]?.name;
-  
+
         if (currentLocation === lastStopPoint) {
           setIsTripFinished(true);
           setCurrentLocation(firstStopPoint); // Ensure it stays at the last point.
@@ -59,28 +61,48 @@ const ViewBusLocation = () => {
         console.error("stopPoints is not in the expected format:", stopPoints);
         message.error("Invalid stop points data.");
       }
-  
+
       setRouteName(routeName);
+
+      // Save driver details
+      setDriverDetails({ driverName, phoneNumber, busId });
     } catch (error) {
       console.error("API Fetch Error:", error);
       message.error("Failed to fetch driver data.");
     } finally {
       setLoading(false);
     }
-  };  
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <div className="view-bus-location">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Title level={3}>{routeName} Bus Location</Title>
-        <Button 
-          icon={<ReloadOutlined />} 
-          onClick={() => fetchDriverData(driverId)} 
-          loading={loading}
-          type="primary"
-        >
-          Refresh
-        </Button>
+        <div>
+          <Button
+            icon={<ReloadOutlined />}
+            onClick={() => fetchDriverData(driverId)}
+            loading={loading}
+            type="primary"
+            style={{ marginRight: '10px' }}
+          >
+            Refresh
+          </Button>
+          <Button
+            onClick={showModal}
+            type="default"
+          >
+            Details
+          </Button>
+        </div>
       </div>
       {loading ? (
         <Skeleton active />
@@ -125,6 +147,38 @@ const ViewBusLocation = () => {
           </div>
         </div>
       )}
+
+      <Modal
+        title={
+          <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+            <span style={{ display: "inline-block", position: "relative" }}>
+              Driver Details
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "-5px",
+                  left: 0,
+                  height: "3px",
+                  width: "100%",
+                  background: "linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)",
+                }}
+              />
+            </span>
+          </div>
+        }
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleOk} // Ensures "X" button closes the modal
+        footer={[
+          <Button key="ok" type="primary" onClick={handleOk}>
+            OK
+          </Button>
+        ]}
+      >
+        <p><strong>Driver Name:</strong> {driverDetails.driverName || "Unknown"}</p>
+        <p><strong>Phone Number:</strong> {driverDetails.phoneNumber || "Unknown"}</p>
+        <p><strong>Bus ID:</strong> {driverDetails.busId || "Unknown"}</p>
+      </Modal>
     </div>
   );
 };

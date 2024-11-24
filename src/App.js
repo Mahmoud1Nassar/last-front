@@ -57,7 +57,7 @@ function App() {
 }
 function MainContent({ isAuthenticated, setLoggedIn }) {
   const location = useLocation();
-  const hideMenuRoutes = ['/', '/CreateProfile', '/Login', '/SignUp', '/AdminDashboard'];
+  const hideMenuRoutes = ['/', '/CreateProfile', '/Login', '/SignUp'];
   const shouldHideMenu = hideMenuRoutes.includes(location.pathname);
   // Determine if the current page is Home
   const isHomePage = location.pathname === '/' &&  location.pathname === '/Login' ;
