@@ -36,14 +36,14 @@ const Home = () => {
   // Toggle the search bar visibility
   const toggleSearchBar = () => {
     setSearchBarActive(!searchBarActive);
-    document.body.classList.toggle('active'); // Optional: for body background change
+    document.body.classList.toggle('active');
   };
 
   const faqData = [
     {
       question: 'How can I track the university bus in real-time?',
       answer:
-        'You can track all our university buses in real-time using our dedicated mobile app or website...',
+        'You can track all our university buses in real-time using our dedicated website...',
     },
     {
       question: 'How do I find the bus stop nearest to me?',
@@ -56,9 +56,14 @@ const Home = () => {
         'Absolutely! All of our buses are fully accessible for students with disabilities...',
     },
     {
-      question: 'Can I bring my bike or large items on the bus?',
+      question: 'Can I suggest a new bus route or stop?',
       answer:
-        'Yes, bikes and large items like sports equipment are welcome on our buses...',
+        'We welcome suggestions for new routes or stops! You can directly suggest that to the admin!',
+    },
+    {
+      question: 'How often are the buses cleaned and sanitized?',
+      answer:
+        'Our buses are cleaned and sanitized daily to ensure the safety and comfort of our passengers.',
     },
     {
       question: 'Are pets allowed on the bus?',

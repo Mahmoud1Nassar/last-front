@@ -57,8 +57,7 @@ const CreateBus = ({ onClose }) => {
       );
       Swal.fire('Success', 'Bus Created Successfully!', 'success');
       onClose();
-    } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong, please try again.');
+    } catch (err) {    
     } finally {
       setIsSubmitting(false);
     }
