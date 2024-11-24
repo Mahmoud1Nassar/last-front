@@ -253,7 +253,7 @@ const handleEmailChange = (e) => {
 
           <div className="dhave-animation">
             <p className="dhaccount">
-              Don't have an account? <Link to="/SignUp" id="showSignupFormLink">Sign up for free</Link>
+              Don't have an account? <Link to="/SignUp" id="showSignupFormLink">Sign Up Here!</Link>
             </p>
           </div>
         </form>

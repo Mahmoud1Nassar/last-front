@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, List, Skeleton, Typography, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled, EnvironmentFilled } from '@ant-design/icons';
 import './TripList.css';
 const { Title, Text } = Typography;
 const TripList = () => {
@@ -186,7 +186,7 @@ const TripList = () => {
                                 <List.Item className="trip-list-item" onClick={() => handleRouteClick(item)}>
                                     <Skeleton avatar title={false} loading={item.loading} active>
                                         <List.Item.Meta
-                                            avatar={<Avatar src="https://via.placeholder.com/40" alt="Route" />}
+                                            avatar={<EnvironmentFilled style={{fontSize: '20px', paddingLeft:'15px', paddingTop:'5px', color:'blueviolet'}}/>}
                                             title={<Text strong>{item.routeName}</Text>}
                                             description={
                                                 <>

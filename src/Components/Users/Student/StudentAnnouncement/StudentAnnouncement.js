@@ -67,10 +67,12 @@ const StudentAnnouncement = () => {
       marginLeft: '200px',
     },
     announcementTitle: {
-      color: 'black',
+      background: 'linear-gradient(90deg, #E61F4A, #FBDD0E, #35EABD)',
+      WebkitBackgroundClip: 'text',
+      color: 'transparent',
       textAlign: 'center',
       marginBottom: '30px',
-    },
+    },      
     announcementItem: {
       backgroundColor: '#fff',
       borderRadius: '8px',

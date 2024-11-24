@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import './Home.css';
-import  '../Header/Header.css';
+import '../Header/Header.css';
 import logo from '../../Assets/img/MASARLOGO.png';
 import Footer from '../../Layout/Footer/Footer.js';
 import { IonIcon } from '@ionic/react';  // If using React Ionicons
-import { logoFacebook, logoTwitter, logoLinkedin,closeOutline } from 'ionicons/icons';
+import { logoFacebook, logoTwitter, logoLinkedin, closeOutline } from 'ionicons/icons';
 
 import author1 from '../../Assets/img/raghad.jpeg';
 import author2 from '../../Assets/img/mahmoud.jpeg';
@@ -82,13 +82,13 @@ const Home = () => {
   };
   return (
     <div>
-       <header id = "home" >
-      {/* Overlay */}
-      <div className={`overlay ${searchBarActive ? 'active' : ''}`} onClick={toggleSearchBar}></div>
-      <div className="wrapper1">
+      <header id="home" >
+        {/* Overlay */}
+        <div className={`overlay ${searchBarActive ? 'active' : ''}`} onClick={toggleSearchBar}></div>
+        <div className="wrapper1">
           <div className="right-col">
             <div className="card card1">
-              <div className="card-details1">               
+              <div className="card-details1">
                 <figure className="img-holder1">
                   <ul className="avatar-list absolute">
                     <li className="avatar-item">
@@ -107,7 +107,7 @@ const Home = () => {
                       </a>
                     </li>
                   </ul>
-                </figure>           
+                </figure>
               </div>
               <div className="card-details">
                 <div>
@@ -170,32 +170,32 @@ const Home = () => {
               </div>
             </div>
           </div>
-      </div>
-      {/* Search bar */}
-      {searchBarActive && (
-        <div className="search-bar" data-search-bar>
-          <div className="input-wrapper">
-            <input type="search" name="search" placeholder="Search" className="input-field" />
-            <button className="search-close-btn" aria-label="close search bar" onClick={toggleSearchBar}>
-              <IonIcon icon={closeOutline} aria-hidden="true" />
-            </button>
-          </div>
-          <p className="search-bar-text">Please enter at least 3 characters</p>
         </div>
-      )}
-    </header>
+        {/* Search bar */}
+        {searchBarActive && (
+          <div className="search-bar" data-search-bar>
+            <div className="input-wrapper">
+              <input type="search" name="search" placeholder="Search" className="input-field" />
+              <button className="search-close-btn" aria-label="close search bar" onClick={toggleSearchBar}>
+                <IonIcon icon={closeOutline} aria-hidden="true" />
+              </button>
+            </div>
+            <p className="search-bar-text">Please enter at least 3 characters</p>
+          </div>
+        )}
+      </header>
       <article>
         {/* HERO SECTION */}
         <section className="section hero" aria-label="home">
           <div className="container">
-            <h1 style={{fontSize:'60px',fontWeight:'normal'}}>
-              Hey, All Aboard! Safe, <br/>Convenient Rides with Our Bus Service.
+            <h1 style={{ fontSize: '60px', fontWeight: 'normal' }}>
+              Hey, All Aboard! Safe, <br />Convenient Rides with Our Bus Service.
             </h1>
           </div>
           <br />
           <div className="news">
-            <p className="employees"style={{marginTop:'30px'}}>100+</p>
-            <p className="details" style={{fontSize:'18px'}}>
+            <p className="employees" style={{ marginTop: '30px' }}>100+</p>
+            <p className="details" style={{ fontSize: '18px' }}>
               Our growing fleet of over <strong>100</strong> buses is designed to meet the diverse needs of our student body. With a variety of routes covering every corner of the campus and surrounding areas, we ensure that transportation is accessible to everyone, no matter where you're located. Each bus is equipped with modern amenities for your comfort, and our drivers are highly trained to prioritize your safety. We are continually investing in our fleet to improve service reliability, and we are excited to introduce new routes and eco-friendly buses in the near future to keep up with the increasing demand.
             </p>
           </div>
@@ -207,7 +207,7 @@ const Home = () => {
           <div className="container">
             {/* RECOMMENDED POST Section */}
             <section className="section recommended" id="services" aria-label="recommended post">
-              <div className="container" style={{paddingLeft:'70px'}}>
+              <div className="container" style={{ paddingLeft: '70px' }}>
                 <p className="section-subtitle">
                   <strong className="strong">Services</strong>
                 </p>
@@ -235,7 +235,7 @@ const Home = () => {
                     <div className="blog-card">
                       <figure className="card-banner img-holder" style={{ '--width': 300, '--height': 360 }}>
                         <img src={recommended2} width="300" height="360" loading="lazy" alt="Weekend and Holiday Bus Schedules" className="img-cover" />
-                       
+
                       </figure>
 
                       <div className="card-content">
@@ -253,7 +253,7 @@ const Home = () => {
                     <div className="blog-card">
                       <figure className="card-banner img-holder" style={{ '--width': 300, '--height': 360 }}>
                         <img src={recommended3} width="300" height="360" loading="lazy" alt="Find the Nearest Bus Stop on Campus" className="img-cover" />
-                        
+
                       </figure>
 
                       <div className="card-content">
@@ -271,7 +271,7 @@ const Home = () => {
                     <div className="blog-card">
                       <figure className="card-banner img-holder" style={{ '--width': 300, '--height': 360 }}>
                         <img src={recommended4} width="300" height="360" loading="lazy" alt="Accessible Bus Services for Students with Disabilities" className="img-cover" />
-                       
+
                       </figure>
 
                       <div className="card-content">
@@ -289,7 +289,7 @@ const Home = () => {
                     <div className="blog-card">
                       <figure className="card-banner img-holder" style={{ '--width': 300, '--height': 360 }}>
                         <img src={recommended5} width="300" height="360" loading="lazy" alt="Bringing Your Bike on the Bus Made Easy" className="img-cover" />
-                       
+
                       </figure>
 
                       <div className="card-content">
@@ -361,7 +361,7 @@ const Home = () => {
                       <a href="#" aria-label="Abdullah's Twitter">
                         <i className="fab fa-twitter"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's YouTube">
+                      <a href="https://github.com/raghad0177" aria-label="Abdullah's YouTube">
                         <i className="fab fa-github"></i>
                       </a>
                     </div>
@@ -375,13 +375,13 @@ const Home = () => {
                     <h3>Abdullah Halimeh</h3>
                     <p>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Abdullah's Facebook">
+                      <a href="#" aria-label="Abdullah's linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's Twitter">
-                        <i className="fab fa-twitter"></i>
+                      <a href="mailto:someone@example.com" aria-label="Send Email">
+                        <i className="fas fa-envelope"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's YouTube">
+                      <a href="https://github.com/AbdullahAOT" aria-label="Abdullah's github">
                         <i className="fab fa-github"></i>
                       </a>
                     </div>
@@ -390,18 +390,18 @@ const Home = () => {
 
                 {/* Person 3 */}
                 <div className="person">
-                  <img src={aya} alt="Aya Alwahedy, Full Stack Developer" />
+                  <img src={aya} alt="Aya Al-Wahidi, Full Stack Developer" />
                   <div className="info">
-                    <h3>Aya Alwahedy</h3>
-                    <p>Full Stack Developer</p>
+                    <h3 style={{color:'black'}}> Aya Al-Wahidi</h3>
+                    <p style={{color:'black'}}>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Abdullah's Facebook">
+                      <a href="https://www.linkedin.com/in/aya-alwahidi/" aria-label="Aya Linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's Twitter">
-                        <i className="fab fa-twitter"></i>
+                      <a href="mailto:ayanalwahidi@gmail.com" aria-label="Send Email">
+                        <i className="fas fa-envelope"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's YouTube">
+                      <a href="https://github.com/AyaAl-wahidi" aria-label="Aya GitHub">
                         <i className="fab fa-github"></i>
                       </a>
                     </div>
@@ -414,13 +414,13 @@ const Home = () => {
                     <h3>Mahmoud Nassar</h3>
                     <p>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Abdullah's Facebook">
+                      <a href="#" aria-label="Mahmoud linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's Twitter">
-                        <i className="fab fa-twitter"></i>
+                      <a href="mailto:someone@example.com" aria-label="Send Email">
+                        <i className="fas fa-envelope"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's YouTube">
+                      <a href="https://github.com/Mahmoud1Nassar" aria-label="Mahmoud github">
                         <i className="fab fa-github"></i>
                       </a>
                     </div>
@@ -434,13 +434,13 @@ const Home = () => {
                     <h3>Noor Albonne</h3>
                     <p>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Abdullah's Facebook">
+                      <a href="#" aria-label="Noor linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's Twitter">
-                        <i className="fab fa-twitter"></i>
+                      <a href="mailto:someone@example.com" aria-label="Send Email">
+                        <i className="fas fa-envelope"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's YouTube">
+                      <a href="https://github.com/nooralbonne" aria-label="Noor github">
                         <i className="fab fa-github"></i>
                       </a>
                     </div>
@@ -466,14 +466,14 @@ const Home = () => {
               onChange={(e) => setEmail(e.target.value)}
               disabled
             />
-            <button type="submit" className="btn" style={{ bottom: 15 }}  onClick={handleSignUpClick}>
+            <button type="submit" className="btn" style={{ bottom: 15 }} onClick={handleSignUpClick}>
               SignUp
             </button>
           </form>
         </section>
       </article>
-    <Footer/>
-  </div>
+      <Footer />
+    </div>
   );
 }
 export default Home;
