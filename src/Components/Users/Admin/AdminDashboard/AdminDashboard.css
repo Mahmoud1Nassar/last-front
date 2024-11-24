@@ -12,28 +12,31 @@
     font-weight: var(--fw-700);
     text-align: center;
     margin-bottom: 30px;
-    position: relative; 
+    position: relative;
 }
 
 .dashboard-title::after {
     content: '';
     display: block;
     width: 100%;
-    height: 4px; 
-    background: linear-gradient(90deg, #E61F4A, #FBDD0E,#FFFF, #aaa, #35EABD);
+    height: 4px;
+    background: linear-gradient(90deg, #E61F4A, #FBDD0E, #FFFF, #aaa, #35EABD);
     animation: animateColors 1s infinite linear;
-  }
-  @keyframes animateColors {
+}
+
+@keyframes animateColors {
     0% {
-      background-position: 0% 50%;
+        background-position: 0% 50%;
     }
+
     50% {
-      background-position: 50% 50%;
+        background-position: 50% 50%;
     }
+
     100% {
-      background-position: 100% 50%;
+        background-position: 100% 50%;
     }
-  }
+}
 
 /* Error Message */
 .error-message {
@@ -139,28 +142,17 @@
 .modal-title {
     font-size: var(--fs-3);
     font-weight: var(--fw-700);
-    position: relative; 
+    position: relative;
 }
 
 .modal-title::after {
     content: '';
     display: block;
     width: 100%;
-    height: 4px; 
-    background: linear-gradient(90deg, #E61F4A, #FBDD0E,#FFFF, #aaa, #35EABD);
+    height: 4px;
+    background: linear-gradient(90deg, #E61F4A, #FBDD0E, #FFFF, #aaa, #35EABD);
     animation: animateColors 1s infinite linear;
-  }
-  @keyframes animateColors {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 50% 50%;
-    }
-    100% {
-      background-position: 100% 50%;
-    }
-  }
+}
 
 .create-button {
     background: #010101;
@@ -175,6 +167,26 @@
 .create-button:hover {
     background: linear-gradient(90deg, #E61F4A, #FBDD0E, #35EABD);
     color: #010101;
+}
+
+/* Scrollable Modal Body */
+.modal-body {
+    max-height: 70vh;
+    /* Limit the height of the modal content */
+    overflow-y: auto;
+    /* Enable vertical scrolling if content overflows */
+    overflow-x: hidden;
+    /* Hide horizontal scroll */
+    padding: 1rem;
+}
+
+/* Scrollable Table Container */
+.scrollable-table-container {
+    max-height: 100%;
+    overflow-y: auto;
+    /* Vertical scrolling */
+    overflow-x: auto;
+    /* Horizontal scrolling for wide tables */
 }
 
 /* Table Styles */
@@ -222,6 +234,7 @@ tbody tr:hover {
     color: var(--light-gray-1);
 }
 
+/* Approve Button */
 .approve-button {
     background-color: #4caf50;
     color: white;

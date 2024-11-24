@@ -6,6 +6,7 @@ import CreateDriver from "../CreateDriver/CreateDriver.js";
 import CreateRoute from "../CreateRoute/CreateRoute.js";
 import CreateSchedule from "../CreateSchedule/CreateSchedule.js";
 import CreateAnnouncement from "../CreateAnnouncement/CreateAnnouncement.js";
+import AllBussesLocations from "../AllBussesLocations/AllBussesLocations.js"
 
 const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -215,38 +216,38 @@ const renderTable = () => {
   } else if (selectedSection === "Maintenances") {
     return (
       <table className="requests-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Bus ID</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Expected Days</th>
-          <th>Request Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {detailedData.map((request, index) => (
-          <tr key={request.maintenanceId}>
-            <td>{index + 1}</td>
-            <td>{request.busId}</td>
-            <td>{request.description}</td>
-            <td>{request.status}</td>
-            <td>{request.expectedMaintenanceDays}</td>
-            <td>{new Date(request.requestDate).toLocaleString()}</td>
-            <td>
-              <button
-                className="approve-button"
-                onClick={() => handleApproveMaintenance(request)}
-              >
-                Approve
-              </button>
-            </td>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Bus ID</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Expected Days</th>
+            <th>Request Date</th>
+            <th>Actions</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {detailedData.map((request, index) => (
+            <tr key={request.maintenanceId}>
+              <td>{index + 1}</td>
+              <td>{request.busId}</td>
+              <td>{request.description}</td>
+              <td>{request.status}</td>
+              <td>{request.expectedMaintenanceDays}</td>
+              <td>{new Date(request.requestDate).toLocaleString()}</td>
+              <td>
+                <button
+                  className="approve-button"
+                  onClick={() => handleApproveMaintenance(request)}
+                >
+                  Approve
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     );
   } else if (selectedSection === "Buses") {
     return (
@@ -255,21 +256,21 @@ const renderTable = () => {
           <tr>
             <th>#</th>
             <th>Bus ID</th>
-            <th>Driver Name</th>            
+            <th>Driver Name</th>
             <th>Capacity Number</th>
             <th>Current Location</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {detailedData.map((request, index) => (
-            <tr key={request.busId}>
+          {detailedData.map((bus, index) => (
+            <tr key={bus.busId}>
               <td>{index + 1}</td>
-              <td>{request.busId}</td>
-              <td>{request.driverName}</td>
-              <td>{request.capacityNumber}</td>
-              <td>{request.currentLocation}</td>
-              <td>{request.status}</td>
+              <td>{bus.busId}</td>
+              <td>{bus.driverName}</td>
+              <td>{bus.capacityNumber}</td>
+              <td>{bus.currentLocation}</td>
+              <td>{bus.status}</td>
             </tr>
           ))}
         </tbody>
@@ -281,20 +282,20 @@ const renderTable = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Route Name</th>            
+            <th>Route Name</th>
             <th>Start Point</th>
             <th>End Point</th>
             <th>Total Distance</th>
           </tr>
         </thead>
         <tbody>
-          {detailedData.map((request, index) => (
-            <tr key={request.routeName}>
+          {detailedData.map((route, index) => (
+            <tr key={route.routeName}>
               <td>{index + 1}</td>
-              <td>{request.routeName}</td>
-              <td>{request.startPoint}</td>
-              <td>{request.endPoint}</td>
-              <td>{request.totalDistance} Km</td>
+              <td>{route.routeName}</td>
+              <td>{route.startPoint}</td>
+              <td>{route.endPoint}</td>
+              <td>{route.totalDistance} Km</td>
             </tr>
           ))}
         </tbody>
@@ -306,103 +307,130 @@ const renderTable = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Title</th>       
-            <th>Audience</th>         
+            <th>Title</th>
+            <th>Audience</th>
             <th>Content</th>
             <th>Created Time</th>
           </tr>
         </thead>
         <tbody>
-          {detailedData.map((request, index) => (
-            <tr key={request.Announcements}>
+          {detailedData.map((announcement, index) => (
+            <tr key={announcement.id}>
               <td>{index + 1}</td>
-              <td>{request.title}</td>
-              <td>{request.audience}</td>
-              <td>{request.content}</td>
-              <td>{new Date(request.createdTime).toLocaleString()}</td>
+              <td>{announcement.title}</td>
+              <td>{announcement.audience}</td>
+              <td>{announcement.content}</td>
+              <td>{new Date(announcement.createdTime).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
       </table>
     );
-  }
-   else if (selectedSection === "Schedule") {
-      return (
-        <table className="requests-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Driver ID</th>
-              <th>Routing ID</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Estimated Time</th>
-              <th>Status</th>
+  } else if (selectedSection === "Schedule") {
+    return (
+      <table className="requests-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Driver ID</th>
+            <th>Routing ID</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Estimated Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {detailedData.map((schedule, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{schedule.driverId}</td>
+              <td>{schedule.routingId}</td>
+              <td>{new Date(schedule.startTime).toLocaleString()}</td>
+              <td>{new Date(schedule.endTime).toLocaleString()}</td>
+              <td>{schedule.estimatedTime}</td>
+              <td>{schedule.status}</td>
             </tr>
-          </thead>
-          <tbody>
-            {detailedData.map((schedule, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{schedule.driverId}</td>
-                <td>{schedule.routingId}</td>
-                <td>{new Date(schedule.startTime).toLocaleString()}</td>
-                <td>{new Date(schedule.endTime).toLocaleString()}</td>
-                <td>{new Date(schedule.estimatedTime).toLocaleString()}</td>
-                <td>{schedule.status}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      );
-    }
-    return <p>No data available for this section.</p>;
-  };
+          ))}
+        </tbody>
+      </table>
+    );
+  } else if (selectedSection === "AllBusesLocations") {
+    return <AllBussesLocations />;
+  }
+  return <p>No data available for this section.</p>;
+};
 
-  return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-title">Admin Dashboard</h1>
-      {error && <p className="error-message">{error}</p>}
-      <div className="dashboard-cards">
-        {Object.keys(dashboardData).map((key) => (
-          <div key={key} className="dashboard-card" onClick={() => handleCardClick(key)}>
-            <h2>Total {key}</h2>
-            <p>{dashboardData[key]}</p>
+
+return (
+  <div className="dashboard-container">
+    <h1 className="dashboard-title">Admin Dashboard</h1>
+    {error && <p className="error-message">{error}</p>}
+    <div className="dashboard-cards">
+      {Object.keys(dashboardData).map((key) => (
+        <div key={key} className="dashboard-card" onClick={() => handleCardClick(key)}>
+          <h2>Total {key}</h2>
+          <p>{dashboardData[key]}</p>
+        </div>
+      ))}
+    </div>
+
+    {showModal && (
+      <div
+        className="modal-overlay"
+        onClick={(e) => {
+          if (e.target.className === "modal-overlay") closeModal();
+        }}
+      >
+        <div className="modal-content">
+          <button className="modal-close" onClick={closeModal}>
+            &times;
+          </button>
+          <div className="modal-header">
+            <h2 className="modal-title">{selectedSection} Details</h2>
+            {selectedSection === "Buses" && !showCreateForm && (
+              <>
+                {/* Button to open the Create Bus form */}
+                <button className="create-button" onClick={openCreateForm}>
+                  Create New Bus
+                </button>
+                {/* Button to view All Buses Locations */}
+                <button
+                  className="view-locations-button"
+                  onClick={() => setSelectedSection("AllBusesLocations")}
+                >
+                  View All Buses Locations
+                </button>
+              </>
+            )}
+            {selectedSection !== "Maintenances" &&
+              selectedSection !== "Buses" &&
+              selectedSection !== "AllBusesLocations" &&
+              !showCreateForm && (
+                <button className="create-button" onClick={openCreateForm}>
+                  Create New {selectedSection}
+                </button>
+              )}
           </div>
-        ))}
-      </div>
 
-      {showModal && (
-        <div
-          className="modal-overlay"
-          onClick={(e) => {
-            if (e.target.className === "modal-overlay") closeModal();
-          }}
-        >
-          <div className="modal-content">
-            <button className="modal-close" onClick={closeModal}>
-              &times;
-            </button>
-            <div className="modal-header">
-              <h2 className="modal-title">{selectedSection} Details</h2>
-              {selectedSection !== "Maintenances" && !showCreateForm && (
-               <button className="create-button" onClick={openCreateForm}>
-                Create New {selectedSection}
-               </button>
-                   )}
-              </div>
-
-
+          <div className="modal-body">
+            {/* Scrollable container for table */}
             {!showCreateForm ? (
-              <>{loading ? <p>Loading...</p> : renderTable()}</>
+              <div className="scrollable-table-container">
+                {loading ? <p>Loading...</p> : renderTable()}
+              </div>
             ) : (
               renderCreateForm()
             )}
           </div>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
+
+
+
 };
 
 export default AdminDashboard;
