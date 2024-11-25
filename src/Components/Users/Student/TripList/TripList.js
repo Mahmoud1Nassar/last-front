@@ -46,6 +46,7 @@ const TripList = () => {
             const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || {};
             setFavorites(storedFavorites);
             fetchRoutes();
+            onSearch();
         }
     }, [token]);
     const fetchRoutes = async () => {
@@ -169,24 +170,40 @@ const TripList = () => {
 
     const onSearch = async (value) => {
         if (!value) {
-            fetchRoutes(); // Reset to the full list if the search bar is cleared
+            console.warn('Search value is empty. Skipping API call.');
             return;
         }
+    
+        console.log('Search term:', value);
+    
+        setLoading(true);
         try {
-            const response = await fetch(`http://localhost:5236/api/Student/SearchRouteByName?name=${value}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            if (response.ok) {
-                const data = await response.json();
-                setRoutes(data.$values || []); // Update the route list with search results
-            } else {
-                message.error('Error fetching search results. Please try again.');
+            const response = await fetch(
+                `https://localhost:7032/api/Student/SearchRouteByName?routeName=${encodeURIComponent(value)}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`API responded with status ${response.status}: ${errorText}`);
             }
+    
+            const data = await response.json();
+            
+            // Safely access $values in the response
+            const routes = data?.$values || [];
+            setRoutes(routes);
+    
+            console.log('API response:', data);
+            console.log('Extracted routes:', routes);
         } catch (error) {
-            console.error('Error during search:', error);
-            message.error('An error occurred during the search. Please try again later.');
+            console.error('Error fetching routes:', error.message);
+        } finally {
+            setLoading(false);
         }
-    };    
+    };        
 
     return (
         <>
@@ -203,7 +220,7 @@ const TripList = () => {
                                     placeholder="Search For Route ..."
                                     style={{ background: 'white' }}
                                     onChange={(e) => onSearch(e.target.value)}/>
-                            </div>
+                            </div>                       
 
                             <List
                                 className="trip-list"
