@@ -7,7 +7,6 @@ function CreateProfile() {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     licenseNumber: '',
-    licenseNumberRaw: '', // Added for unformatted license number
     busId: '',
     status: 'Active', // Default value for status
     driverId: '',
@@ -45,22 +44,11 @@ function CreateProfile() {
   }, [token]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'licenseNumber') {
-      // Remove any non-digit characters to ensure only numbers are stored
-      const rawValue = value.replace(/[^0-9]/g, '');
-      // Format the license number as 'XX-XXXXX'
-      const formattedValue = rawValue.slice(0, 2) + (rawValue.length > 2 ? '-' : '') + rawValue.slice(2, 7);
-      setProfileData({
-        ...profileData,
-        licenseNumber: formattedValue, // Save the formatted version for display
-        licenseNumberRaw: rawValue,   // Save the unformatted version for submission
-      });
-    } else {
       setProfileData({
         ...profileData,
         [name]: value,
       });
-    }
+    
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,7 +61,6 @@ function CreateProfile() {
     try {
       const payload = {
         ...profileData,
-        licenseNumber: profileData.licenseNumberRaw, // Send the raw license number
       };
       await axios.post(
         `http://localhost:5236/api/Driver/CreateDriverInfo?email=${email}`,
@@ -168,7 +155,7 @@ function CreateProfile() {
               License Number
             </label>
             <input
-              type="text"
+              type="number"
               id="licenseNumber"
               name="licenseNumber"
               value={profileData.licenseNumber}

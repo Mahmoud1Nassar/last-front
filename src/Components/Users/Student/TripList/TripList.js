@@ -170,6 +170,7 @@ const TripList = () => {
 
     const onSearch = async (value) => {
         if (!value) {
+            setRoutes(routes);
             console.warn('Search value is empty. Skipping API call.');
             return;
         }
