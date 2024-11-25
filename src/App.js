@@ -26,7 +26,8 @@ import AdminDashboard from './Components/Users/Admin/AdminDashboard/AdminDashboa
 import VerticalMenu from './Components/Layout/VerticalMenu/VerticalMenu';
 import FavList from './Components/Users/Student/FavList/FavList.js'
 import SignUp from "./Components/Registration/SignUp/SignUp.js";
-import AllBussesLosations from './Components/Users/Admin/AllBussesLocations/AllBussesLocations.js';
+import AllBusesLocations from './Components/Users/Admin/AllBusesLocations/AllBusesLocations.js';
+
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const token = useSelector((state) => state.auth.token);
@@ -57,7 +58,7 @@ function App() {
 }
 function MainContent({ isAuthenticated, setLoggedIn }) {
   const location = useLocation();
-  const hideMenuRoutes = ['/', '/CreateProfile', '/Login', '/SignUp'];
+  const hideMenuRoutes = ['/', '/CreateProfile', '/Login', '/SignUp', '/AdminDashboard'];
   const shouldHideMenu = hideMenuRoutes.includes(location.pathname);
   // Determine if the current page is Home
   const isHomePage = location.pathname === '/' &&  location.pathname === '/Login' ;
@@ -88,7 +89,7 @@ function MainContent({ isAuthenticated, setLoggedIn }) {
           <Route path="/ViewBusLocation/:driverId" element={<ViewBusLocation />} />
           <Route path="/FavList" element={<FavList />} />
           <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/AllBussesLosations" element={<AllBussesLosations />} />
+          <Route path="/AllBusesLocations" element={<AllBusesLocations />} />
         </Routes>
       </div>
     </>

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, List, Skeleton, Typography, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { HeartOutlined, HeartFilled, EnvironmentFilled } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import './TripList.css';
 const { Title, Text } = Typography;
+
 const TripList = () => {
     const [loading, setLoading] = useState(false);
     const [routes, setRoutes] = useState([]);
@@ -15,6 +16,14 @@ const TripList = () => {
     const [schedules, setSchedules] = useState([]);
     const [profile, setProfile] = useState({});
     const token = useSelector((state) => state.auth.token);
+    const [searchBarActive, setSearchBarActive] = useState(false);
+    const [overlayActive, setOverlayActive] = useState(false);
+    // Toggle the search bar visibility
+    const toggleSearchBar = () => {
+        setSearchBarActive(!searchBarActive);
+        setOverlayActive(!overlayActive);
+        document.body.classList.toggle('active'); // For body background change
+    };
     const navigate = useNavigate();
     useEffect(() => {
         const getUserInfoFromToken = (token) => {
@@ -30,19 +39,15 @@ const TripList = () => {
                 return { studentId: null };
             }
         };
-
         if (token) {
             const userInfo = getUserInfoFromToken(token);
             setProfile(userInfo);
-
             // Load favorites from local storage
             const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || {};
             setFavorites(storedFavorites);
-
             fetchRoutes();
         }
     }, [token]);
-
     const fetchRoutes = async () => {
         setLoading(true);
         try {
@@ -52,7 +57,6 @@ const TripList = () => {
             const data = await response.json();
             const routes = data.$values || [];
             setRoutes(routes);
-
             // Sync with local storage for initial favorite status
             const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || {};
             const favoriteStatus = {};
@@ -92,16 +96,13 @@ const TripList = () => {
                     delete storedFavorites[routeId];
                 }
                 localStorage.setItem('favorites', JSON.stringify(storedFavorites));
-
                 // Update state
                 setFavorites((prevFavorites) => ({
                     ...prevFavorites,
                     [routeId]: isAddingToFavorites,
                 }));
-
                 message.success(
-                    `Route ${
-                        isAddingToFavorites ? "added to" : "removed from"
+                    `Route ${isAddingToFavorites ? "added to" : "removed from"
                     } favorites successfully.`
                 );
             } else {
@@ -112,7 +113,6 @@ const TripList = () => {
             message.error("An error occurred. Please try again later.");
         }
     };
-
     const fetchRouteDetails = async (routeId) => {
         setLoading(true);
         try {
@@ -153,127 +153,155 @@ const TripList = () => {
             message.error('Unable to fetch schedules. Please try again later.');
         }
     };
-
     const formatTime = (timeString) => {
         const date = new Date(timeString);
         return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     };
-
     const handleRouteClick = (route) => {
         fetchRouteDetails(route.routingId);
     };
-
     const goBackToList = () => {
         fetchRoutes();
     };
-
     const handleViewBusLocation = (driverId) => {
         navigate(`/ViewBusLocation/${driverId}`);
     };
 
+    const onSearch = async (value) => {
+        if (!value) {
+            fetchRoutes(); // Reset to the full list if the search bar is cleared
+            return;
+        }
+        try {
+            const response = await fetch(`http://localhost:5236/api/Student/SearchRouteByName?name=${value}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setRoutes(data.$values || []); // Update the route list with search results
+            } else {
+                message.error('Error fetching search results. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error during search:', error);
+            message.error('An error occurred during the search. Please try again later.');
+        }
+    };    
+
     return (
-        <div className="student-home-page">
-            <div className="content-section">
-                {selectedMenu === "Trip List" && !routeDetails && (
-                    <div className="trip-list-section">
-                        <Title level={3} className="trip-list-title">Available Trips</Title>
-                        <List
-                            className="trip-list"
-                            loading={loading}
-                            itemLayout="vertical"
-                            dataSource={routes}
-                            renderItem={(item) => (
-                                <List.Item className="trip-list-item" onClick={() => handleRouteClick(item)}>
-                                    <Skeleton avatar title={false} loading={item.loading} active>
-                                        <List.Item.Meta
-                                            avatar={<EnvironmentFilled style={{fontSize: '20px', paddingLeft:'15px', paddingTop:'5px', color:'blueviolet'}}/>}
-                                            title={<Text strong>{item.routeName}</Text>}
-                                            description={
-                                                <>
-                                                    <Text type="secondary">Start Point: {item.startPoint}</Text><br />
-                                                    <Text type="secondary">End Point: {item.endPoint}</Text>
-                                                    <br />
-                                                    <Button
-                                                        onClick={(e) => toggleFavorite(item.routingId, e)}
-                                                        shape="circle"
-                                                        icon={
-                                                            favorites[item.routingId] ? (
-                                                                <HeartFilled style={{ color: 'red' }} />
-                                                            ) : (
-                                                                <HeartOutlined />
-                                                            )
-                                                        }
-                                                    />
-                                                </>
-                                            }
-                                        />
-                                    </Skeleton>
-                                </List.Item>
-                            )}
-                        />
-                    </div>
-                )}
-                {routeDetails && (
-                    <div className="route-details-section">
-                        <Title level={3} className="rdetails">Route Details: {routeDetails.routeName}</Title>
-                        <Text><strong className="SPoint">Start Point:</strong> {routeDetails.startPoint}</Text><br />
-                        <Text><strong className="EPoint">End Point:</strong> {routeDetails.endPoint}</Text><br />
-                        <Text><strong className="Distance">Distance:</strong> {routeDetails.totalDistance} km</Text><br />
-                        <div className="stop-points-section">
-                            <Title level={4} className="title-stop-points">Stop Points</Title>
-                            {stopPoints.length > 0 ? (
-                                <div className="stop-points-list-horizontal">
-                                    {stopPoints.map((stopPoint, index) => (
-                                        <div key={stopPoint.stopPointId} className="stop-point-item">
-                                            <span className="value">{stopPoint?.name || 'No name available'}</span>
-                                            {index < stopPoints.length - 1 && <span className="pointer">➔</span>}
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <Text className="no-stop-points">No stop points available.</Text>
-                            )}
+        <>
+            <div className="student-home-page">
+                {overlayActive && <div className="overlay" data-overlay onClick={toggleSearchBar}></div>}
+                <div className="content-section">
+                    {selectedMenu === "Trip List" && !routeDetails && (
+                        <div className="trip-list-section">
+                            <Title level={3} className="trip-list-title">Available Trips</Title>
+
+                            <div className={`search-bar ${searchBarActive ? 'active' : ''}`} data-search-bar>
+                                <input
+                                    type="text"
+                                    placeholder="Search For Route ..."
+                                    style={{ background: 'white' }}
+                                    onChange={(e) => onSearch(e.target.value)}/>
+                            </div>
+
+                            <List
+                                className="trip-list"
+                                loading={loading}
+                                itemLayout="vertical"
+                                dataSource={routes}
+                                renderItem={(item) => (
+                                    <List.Item className="trip-list-item" onClick={() => handleRouteClick(item)}>
+                                        <Skeleton avatar title={false} loading={item.loading} active>
+                                            <List.Item.Meta
+                                                avatar={<Avatar src="https://via.placeholder.com/40" alt="Route" />}
+                                                title={<Text strong>{item.routeName}</Text>}
+                                                description={
+                                                    <>
+                                                        <Text type="secondary">Start Point: {item.startPoint}</Text><br />
+                                                        <Text type="secondary">End Point: {item.endPoint}</Text>
+                                                        <br />
+                                                        <Button
+                                                            onClick={(e) => toggleFavorite(item.routingId, e)}
+                                                            shape="circle"
+                                                            icon={
+                                                                favorites[item.routingId] ? (
+                                                                    <HeartFilled style={{ color: 'red' }} />
+                                                                ) : (
+                                                                    <HeartOutlined />
+                                                                )
+                                                            }
+                                                        />
+                                                    </>
+                                                }
+                                            />
+                                        </Skeleton>
+                                    </List.Item>
+                                )}
+                            />
                         </div>
-                        <div className="schedules-section">
-                            <Title level={4} className="titleSchedule">Schedules</Title>
-                            {schedules.length > 0 ? (
-                                <List
-                                    className="schedules-list"
-                                    itemLayout="vertical"
-                                    dataSource={schedules}
-                                    renderItem={(schedule) => (
-                                        <List.Item key={schedule.scheduleId} className="listI2">
-                                            <Text><strong className="Starttime">Start Time:</strong> {formatTime(schedule.startTime)}</Text><br />
-                                            <Text><strong className="Endtime">End Time:</strong> {formatTime(schedule.endTime)}</Text><br />
-                                            <Button
-                                                onClick={() => handleViewBusLocation(schedule.driverId)}
-                                                style={{ marginTop: '10px', backgroundColor: '#1890FF', color: 'white' }}
-                                            >
-                                                View Bus Location
-                                            </Button>
-                                        </List.Item>
-                                    )}
-                                />
-                            ) : (
-                                <Text className="noschedules">No schedules available.</Text>
-                            )}
+                    )}
+                    {routeDetails && (
+                        <div className="route-details-section">
+                            <Title level={3} className="rdetails">Route Details: {routeDetails.routeName}</Title>
+                            <Text><strong className="SPoint">Start Point:</strong> {routeDetails.startPoint}</Text><br />
+                            <Text><strong className="EPoint">End Point:</strong> {routeDetails.endPoint}</Text><br />
+                            <Text><strong className="Distance">Distance:</strong> {routeDetails.totalDistance} km</Text><br />
+                            <div className="stop-points-section">
+                                <Title level={4} className="title-stop-points">Stop Points</Title>
+                                {stopPoints.length > 0 ? (
+                                    <div className="stop-points-list-horizontal">
+                                        {stopPoints.map((stopPoint, index) => (
+                                            <div key={stopPoint.stopPointId} className="stop-point-item">
+                                                <span className="value">{stopPoint?.name || 'No name available'}</span>
+                                                {index < stopPoints.length - 1 && <span className="pointer">➔</span>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <Text className="no-stop-points">No stop points available.</Text>
+                                )}
+                            </div>
+                            <div className="schedules-section">
+                                <Title level={4} className="titleSchedule">Schedules</Title>
+                                {schedules.length > 0 ? (
+                                    <List
+                                        className="schedules-list"
+                                        itemLayout="vertical"
+                                        dataSource={schedules}
+                                        renderItem={(schedule) => (
+                                            <List.Item key={schedule.scheduleId} className="listI2">
+                                                <Text><strong className="Starttime">Start Time:</strong> {formatTime(schedule.startTime)}</Text><br />
+                                                <Text><strong className="Endtime">End Time:</strong> {formatTime(schedule.endTime)}</Text><br />
+                                                <Button
+                                                    onClick={() => handleViewBusLocation(schedule.driverId)}
+                                                    style={{ marginTop: '10px', backgroundColor: '#1890FF', color: 'white' }}
+                                                >
+                                                    View Bus Location
+                                                </Button>
+                                            </List.Item>
+                                        )}
+                                    />
+                                ) : (
+                                    <Text className="noschedules">No schedules available.</Text>
+                                )}
+                            </div>
+                            <Button
+                                onClick={() => {
+                                    setRouteDetails(null);
+                                    setSelectedMenu("Trip List");
+                                    fetchRoutes();
+                                }}
+                                style={{ marginTop: '10px' }}
+                                className="btu"
+                            >
+                                Back to Trip List
+                            </Button>
                         </div>
-                        <Button
-                            onClick={() => {
-                                setRouteDetails(null);
-                                setSelectedMenu("Trip List");
-                                fetchRoutes();
-                            }}
-                            style={{ marginTop: '10px' }}
-                            className="btu"
-                        >
-                            Back to Trip List
-                        </Button>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
-
 export default TripList;

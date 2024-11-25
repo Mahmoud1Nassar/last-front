@@ -42,7 +42,7 @@ const ViewBusLocation = () => {
         }));
 
         setStopPoints(mappedStopPoints);
-
+        
         const lastStopPoint = mappedStopPoints[mappedStopPoints.length - 1]?.name;
         const firstStopPoint = mappedStopPoints[0]?.name;
 

@@ -6,7 +6,7 @@ import CreateDriver from "../CreateDriver/CreateDriver.js";
 import CreateRoute from "../CreateRoute/CreateRoute.js";
 import CreateSchedule from "../CreateSchedule/CreateSchedule.js";
 import CreateAnnouncement from "../CreateAnnouncement/CreateAnnouncement.js";
-import AllBussesLocations from "../AllBussesLocations/AllBussesLocations.js"
+import AllBusesLocations from "../AllBusesLocations/AllBusesLocations.js"
 
 const AdminDashboard = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -148,6 +148,35 @@ const AdminDashboard = () => {
         return <p>No form available for this section.</p>;
     }
   };
+
+  const handleDeleteDriver = (email) => {
+    const url = `http://localhost:5236/api/Admin/DeleteDriverByAdmin?email=${email}`;
+    fetch(url, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Driver deleted successfully");
+          return;
+        }
+        return response.text().then((errorText) => {
+          try {
+            const errorJson = JSON.parse(errorText);
+            throw new Error(errorJson.message || "Failed to delete driver");
+          } catch {
+            throw new Error(errorText || "Failed to delete driver");
+          }
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+        alert(`Error: ${error.message}`);
+      });
+  };
+
   const handleApproveMaintenance = async (request) => {
     const ifApprove = true; // Assuming we always approve
     const url = `http://localhost:5236/api/Admin/ApprovedMaintenanceRequestByAdmin?ifApprove=${ifApprove}`;
@@ -195,23 +224,31 @@ const renderTable = () => {
   if (selectedSection === "Drivers") {
     return (
       <table className="drivers-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Driver Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {detailedData.map((driver, index) => (
-            <tr key={driver.id}>
-              <td>{index + 1}</td>
-              <td>{driver.userName}</td>
-              <td>{driver.email}</td>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Driver Name</th>
+              <th>Email</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {detailedData.map((driver, index) => (
+              <tr key={driver.id}>
+                <td>{index + 1}</td>
+                <td>{driver.userName}</td>
+                <td>{driver.email}</td>
+                <td>
+                  <button
+                    onClick={() => handleDeleteDriver(driver.email)}
+                    className="delete-btn">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
     );
   } else if (selectedSection === "Maintenances") {
     return (
@@ -356,13 +393,14 @@ const renderTable = () => {
       </table>
     );
   } else if (selectedSection === "AllBusesLocations") {
-    return <AllBussesLocations />;
+    return <AllBusesLocations />;
   }
   return <p>No data available for this section.</p>;
 };
 
 
 return (
+  <div>
   <div className="dashboard-container">
     <h1 className="dashboard-title">Admin Dashboard</h1>
     {error && <p className="error-message">{error}</p>}
@@ -394,13 +432,6 @@ return (
                 <button className="create-button" onClick={openCreateForm}>
                   Create New Bus
                 </button>
-                {/* Button to view All Buses Locations */}
-                <button
-                  className="view-locations-button"
-                  onClick={() => setSelectedSection("AllBusesLocations")}
-                >
-                  View All Buses Locations
-                </button>
               </>
             )}
             {selectedSection !== "Maintenances" &&
@@ -426,11 +457,9 @@ return (
         </div>
       </div>
     )}
+  </div><br/>
+  <AllBusesLocations/>
   </div>
 );
-
-
-
 };
-
 export default AdminDashboard;

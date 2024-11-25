@@ -12,7 +12,6 @@ const Register = () => {
   const [formData, setFormData] = useState({
     userName: '',
     phoneNumber: '',
-    gender: '',
     email: '',
     password: '',
     phone: '+962 ',
@@ -46,9 +45,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { userName, phoneNumber, email, password, phone, gender } = formData;
+    const { userName, phoneNumber, email, password, phone} = formData;
 
-    if (!phoneNumber || !userName || !email || !password || !phone || !gender) {
+    if (!phoneNumber || !userName || !email || !password || !phone) {
       setError("All fields are required.");
       return;
     }

@@ -3,23 +3,22 @@ import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import '../uniForm.css';
-
 const CreateDriver = ({ onClose }) => {
   const [driverData, setDriverData] = useState({
+    userType: 'driver',
     userName: '',
     userEmail: '',
-    phone: '+962 ',
+    roles: [
+      'driver'
+    ],
+    phone: '962 ',
     password: '',
   });
-
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const token = useSelector((state) => state.auth.token);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
     if (name === 'phone') {
       // Ensure the input always starts with "+962 " and restricts to 9 digits after the prefix
       const formattedValue = value.replace(/[^\d]/g, ''); // Remove non-numeric characters
@@ -28,7 +27,7 @@ const CreateDriver = ({ onClose }) => {
         if (newPhone.length <= 9) {
           setDriverData((prevState) => ({
             ...prevState,
-            [name]: `+962 ${newPhone}`, // Add "+962 " prefix dynamically
+            [name]: `+962${newPhone.replace(/\s/g, '')}`, // Add "+962" prefix dynamically and sanitize
           }));
         }
       }
@@ -39,22 +38,19 @@ const CreateDriver = ({ onClose }) => {
       }));
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
       await axios.post(
         'http://localhost:5236/api/Admin/CreateDriverByAdmin',
-        { ...driverData, roles: ['driver'], userType: 'driver', phone: driverData.phone.replace(/\s/g, '') }, // Remove spaces for backend submission
+        driverData, // Directly use driverData as phone is already sanitized
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
           },
         }
       );
-
       Swal.fire('Success', 'Driver Created Successfully!', 'success');
       onClose(); // Close modal
     } catch (err) {
@@ -63,7 +59,6 @@ const CreateDriver = ({ onClose }) => {
       setIsSubmitting(false);
     }
   };
-
   return (
     <div className="form-container4">
       <div className="form-card">
@@ -122,5 +117,4 @@ const CreateDriver = ({ onClose }) => {
     </div>
   );
 };
-
 export default CreateDriver;
