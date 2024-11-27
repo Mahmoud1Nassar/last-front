@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import './AllBussesLocations.css'
+import './AllBusesLocations.css'
 import { useSelector } from "react-redux";
-
-const AllLocations = () => {
+const AllBusesLocations = () => {
   const [loading, setLoading] = useState(false);
   const [locations, setLocations] = useState([]);
   const token = useSelector((state) => state.auth.token);
-
   useEffect(() => {
     fetchAllLocations();
   }, []);
-
   const fetchAllLocations = async () => {
     setLoading(true);
     try {
@@ -22,21 +19,17 @@ const AllLocations = () => {
           },
         }
       );
-
       if (!response.ok) {
         throw new Error(`Error fetching locations: ${response.status}`);
       }
-
       const data = await response.json();
       const buses = data.$values || [];
-
       const formattedLocations = buses.map((bus) => ({
         currentLocation: bus.currentLocation || "Unknown",
         routeName: bus.routeName || "Unknown",
-        driver: bus.driver || "Unknown",
+        driver: bus.driverName || "Unknown",
         busId: bus.busId || "Unknown",
       }));
-
       setLocations(formattedLocations);
     } catch (error) {
       console.error("Error fetching locations:", error);
@@ -44,9 +37,8 @@ const AllLocations = () => {
       setLoading(false);
     }
   };
-
   return (
-    <div className="locations-container">
+    <div className="locations-container"style={{margin:'100px'}}>
       <h1 className="locations-title">All Buses Current Locations</h1>
       <div className="locations-grid">
         {loading
@@ -58,16 +50,16 @@ const AllLocations = () => {
               </div>
             ))
           : locations.map((location, index) => (
-              <div key={index} className="location-card">
-                <h2>{location.routeName}</h2>
+              <div key={index} className="location-card" >
+                <h2 style={{fontSize:'25px'}}>{location.routeName}</h2>
                 <p>
-                  <strong>Current Location:</strong> <br/>{location.currentLocation}
+                  <strong style={{fontSize:'20px'}}>Current Location:</strong> <br/>{location.currentLocation}
                 </p>
                 <p>
-                  <strong>Driver:</strong> {location.driver}
+                  <strong >Driver:</strong> {location.driver}
                 </p>
                 <p>
-                  <strong>Bus ID:</strong> {location.busId}
+                  <strong style={{fontSize:'15px'}}>Bus ID:</strong> {location.busId}
                 </p>
               </div>
             ))}
@@ -75,5 +67,4 @@ const AllLocations = () => {
     </div>
   );
 };
-
-export default AllLocations;
+export default AllBusesLocations;

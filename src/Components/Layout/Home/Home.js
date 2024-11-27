@@ -48,7 +48,7 @@ const Home = () => {
     {
       question: 'How do I find the bus stop nearest to me?',
       answer:
-        'Finding the nearest bus stop is easy! You can use our interactive campus map...',
+        'Finding the nearest bus stop is easy! You can use our interactive campus dashboard or contact the driver that he assigned to you region...',
     },
     {
       question: 'Are the buses accessible for students with disabilities?',
@@ -77,8 +77,8 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle the subscription logic (e.g., send the email to an API or store it)
-    console.log('Subscribed with email:', email);
+    // Handle the registeration logic (e.g., send the email to an API or store it)
+    console.log('Registered with email:', email);
   };
   return (
     <div>
@@ -189,7 +189,7 @@ const Home = () => {
         <section className="section hero" aria-label="home">
           <div className="container">
             <h1 style={{ fontSize: '60px', fontWeight: 'normal' }}>
-              Hey, All Aboard! Safe, <br />Convenient Rides with Our Bus Service.
+            <strong className="strong">Hey</strong>, All Aboard! <br />Safe, Convenient <strong className="strong">Rides</strong> with Our Bus Service.
             </h1>
           </div>
           <br />
@@ -355,13 +355,13 @@ const Home = () => {
                     <h3>Raghad Abdullah</h3>
                     <p>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Abdullah's Facebook">
+                      <a href="https://www.linkedin.com/in/raghadalyakhri/" aria-label="Raghad linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="#" aria-label="Abdullah's Twitter">
-                        <i className="fab fa-twitter"></i>
+                      <a href="mailto:raghad@gmail.com" aria-label="Send Email">
+                        <i className="fas fa-envelope"></i>
                       </a>
-                      <a href="https://github.com/raghad0177" aria-label="Abdullah's YouTube">
+                      <a href="https://github.com/raghad0177" aria-label="Raghad github">
                         <i className="fab fa-github"></i>
                       </a>
                     </div>
@@ -375,10 +375,10 @@ const Home = () => {
                     <h3>Abdullah Halimeh</h3>
                     <p>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Abdullah's linkedin">
+                      <a href="https://www.linkedin.com/in/abdullah-abu-halimeh-494086282/" aria-label="Abdullah's linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="mailto:someone@example.com" aria-label="Send Email">
+                      <a href="mailto:abdallahabuhalima.1.jo@gmail.com" aria-label="Send Email">
                         <i className="fas fa-envelope"></i>
                       </a>
                       <a href="https://github.com/AbdullahAOT" aria-label="Abdullah's github">
@@ -414,10 +414,10 @@ const Home = () => {
                     <h3>Mahmoud Nassar</h3>
                     <p>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Mahmoud linkedin">
+                      <a href="https://www.linkedin.com/in/mahmoud-al-anbtawi/" aria-label="Mahmoud linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="mailto:someone@example.com" aria-label="Send Email">
+                      <a href="mailto:mahmoud.nassar2001@outlook.com" aria-label="Send Email">
                         <i className="fas fa-envelope"></i>
                       </a>
                       <a href="https://github.com/Mahmoud1Nassar" aria-label="Mahmoud github">
@@ -434,10 +434,10 @@ const Home = () => {
                     <h3>Noor Albonne</h3>
                     <p>Full Stack Developer</p>
                     <div className="social-media">
-                      <a href="#" aria-label="Noor linkedin">
+                      <a href="https://www.linkedin.com/in/nooralbonne/" aria-label="Noor linkedin">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                      <a href="mailto:someone@example.com" aria-label="Send Email">
+                      <a href="mailto:Nooralbonne@hotmail.com" aria-label="Send Email">
                         <i className="fas fa-envelope"></i>
                       </a>
                       <a href="https://github.com/nooralbonne" aria-label="Noor github">
@@ -454,7 +454,7 @@ const Home = () => {
 
         <section className="section newsletter">
           <h2 className="h2 section-title">
-            Subscribe for <strong className="strong">new updates</strong>
+          Register for <strong className="strong">new updates</strong>
           </h2>
 
           <form onSubmit={handleSubmit} className="newsletter-form">
@@ -464,8 +464,7 @@ const Home = () => {
               required
               className="email-field"
               onChange={(e) => setEmail(e.target.value)}
-              disabled
-            />
+              disabled/>
             <button type="submit" className="btn" style={{ bottom: 15 }} onClick={handleSignUpClick}>
               SignUp
             </button>
